@@ -27,11 +27,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblPorcentajeCoaseguradoras = new System.Windows.Forms.Label();
+            this.lblMontoCoaseguradoras = new System.Windows.Forms.Label();
             this.gridCoaseguradoras = new System.Windows.Forms.DataGridView();
+            this.CompaniaCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PorcentajeCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MontoCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,26 +50,42 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblPorcentajeCoaseguradoras = new System.Windows.Forms.Label();
-            this.lblMontoCoaseguradoras = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.gridFee = new System.Windows.Forms.DataGridView();
-            this.CompaniaCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PorcentajeCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MontoCoaseguradoras = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CompaniasFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PorcentajeFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MontoFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupMetodoPago = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.groupComisionAgente = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.groupSiniestros = new System.Windows.Forms.GroupBox();
+            this.rdbSiniestroParticipacion = new System.Windows.Forms.RadioButton();
+            this.rdbSiniestro100 = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtMontoSiniestro = new System.Windows.Forms.TextBox();
+            this.lblMontoSiniestro = new System.Windows.Forms.Label();
+            this.groupGarantiaPago = new System.Windows.Forms.GroupBox();
+            this.rdbContratoSeguro = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.cmbGarantiaPago = new System.Windows.Forms.ComboBox();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnAtras = new System.Windows.Forms.Button();
+            this.btnSuspender = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCoaseguradoras)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridFee)).BeginInit();
+            this.groupMetodoPago.SuspendLayout();
+            this.groupComisionAgente.SuspendLayout();
+            this.groupSiniestros.SuspendLayout();
+            this.groupGarantiaPago.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -96,6 +119,50 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Coaseguradoras";
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.62185F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.37815F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblMontoCoaseguradoras, 2, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 203);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.05882F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(491, 24);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(186, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "TOTAL DE LA PARTICIPACIÓN";
+            // 
+            // lblPorcentajeCoaseguradoras
+            // 
+            this.lblPorcentajeCoaseguradoras.AutoSize = true;
+            this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(196, 0);
+            this.lblPorcentajeCoaseguradoras.Name = "lblPorcentajeCoaseguradoras";
+            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(30, 13);
+            this.lblPorcentajeCoaseguradoras.TabIndex = 1;
+            this.lblPorcentajeCoaseguradoras.Text = "30%";
+            // 
+            // lblMontoCoaseguradoras
+            // 
+            this.lblMontoCoaseguradoras.AutoSize = true;
+            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(356, 0);
+            this.lblMontoCoaseguradoras.Name = "lblMontoCoaseguradoras";
+            this.lblMontoCoaseguradoras.Size = new System.Drawing.Size(82, 13);
+            this.lblMontoCoaseguradoras.TabIndex = 2;
+            this.lblMontoCoaseguradoras.Text = "$ 300,000.00";
+            // 
             // gridCoaseguradoras
             // 
             this.gridCoaseguradoras.AllowUserToAddRows = false;
@@ -105,19 +172,40 @@
             this.CompaniaCoaseguradoras,
             this.PorcentajeCoaseguradoras,
             this.MontoCoaseguradoras});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridCoaseguradoras.Location = new System.Drawing.Point(13, 20);
             this.gridCoaseguradoras.Name = "gridCoaseguradoras";
             this.gridCoaseguradoras.ReadOnly = true;
             this.gridCoaseguradoras.Size = new System.Drawing.Size(491, 176);
             this.gridCoaseguradoras.TabIndex = 0;
+            // 
+            // CompaniaCoaseguradoras
+            // 
+            this.CompaniaCoaseguradoras.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CompaniaCoaseguradoras.HeaderText = "Compañías Participantes";
+            this.CompaniaCoaseguradoras.Name = "CompaniaCoaseguradoras";
+            this.CompaniaCoaseguradoras.ReadOnly = true;
+            this.CompaniaCoaseguradoras.Width = 158;
+            // 
+            // PorcentajeCoaseguradoras
+            // 
+            this.PorcentajeCoaseguradoras.HeaderText = "% Participación";
+            this.PorcentajeCoaseguradoras.Name = "PorcentajeCoaseguradoras";
+            this.PorcentajeCoaseguradoras.ReadOnly = true;
+            // 
+            // MontoCoaseguradoras
+            // 
+            this.MontoCoaseguradoras.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MontoCoaseguradoras.HeaderText = "Monto de Participación";
+            this.MontoCoaseguradoras.Name = "MontoCoaseguradoras";
+            this.MontoCoaseguradoras.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -237,50 +325,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tipo de Coaseguro";
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.62185F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.37815F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
-            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblMontoCoaseguradoras, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 203);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.05882F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(491, 24);
-            this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(186, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "TOTAL DE LA PARTICIPACIÓN";
-            // 
-            // lblPorcentajeCoaseguradoras
-            // 
-            this.lblPorcentajeCoaseguradoras.AutoSize = true;
-            this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(196, 0);
-            this.lblPorcentajeCoaseguradoras.Name = "lblPorcentajeCoaseguradoras";
-            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(30, 13);
-            this.lblPorcentajeCoaseguradoras.TabIndex = 1;
-            this.lblPorcentajeCoaseguradoras.Text = "30%";
-            // 
-            // lblMontoCoaseguradoras
-            // 
-            this.lblMontoCoaseguradoras.AutoSize = true;
-            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(357, 0);
-            this.lblMontoCoaseguradoras.Name = "lblMontoCoaseguradoras";
-            this.lblMontoCoaseguradoras.Size = new System.Drawing.Size(82, 13);
-            this.lblMontoCoaseguradoras.TabIndex = 2;
-            this.lblMontoCoaseguradoras.Text = "$ 300,000.00";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.gridFee);
@@ -302,40 +346,19 @@
             this.CompaniasFee,
             this.PorcentajeFee,
             this.MontoFee});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridFee.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridFee.DefaultCellStyle = dataGridViewCellStyle4;
             this.gridFee.Location = new System.Drawing.Point(7, 20);
             this.gridFee.Name = "gridFee";
             this.gridFee.Size = new System.Drawing.Size(520, 152);
             this.gridFee.TabIndex = 0;
             this.gridFee.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gridFee_EditingControlShowing);
-            // 
-            // CompaniaCoaseguradoras
-            // 
-            this.CompaniaCoaseguradoras.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CompaniaCoaseguradoras.HeaderText = "Compañías Participantes";
-            this.CompaniaCoaseguradoras.Name = "CompaniaCoaseguradoras";
-            this.CompaniaCoaseguradoras.ReadOnly = true;
-            this.CompaniaCoaseguradoras.Width = 158;
-            // 
-            // PorcentajeCoaseguradoras
-            // 
-            this.PorcentajeCoaseguradoras.HeaderText = "% Participación";
-            this.PorcentajeCoaseguradoras.Name = "PorcentajeCoaseguradoras";
-            this.PorcentajeCoaseguradoras.ReadOnly = true;
-            // 
-            // MontoCoaseguradoras
-            // 
-            this.MontoCoaseguradoras.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MontoCoaseguradoras.HeaderText = "Monto de Participación";
-            this.MontoCoaseguradoras.Name = "MontoCoaseguradoras";
-            this.MontoCoaseguradoras.ReadOnly = true;
             // 
             // CompaniasFee
             // 
@@ -359,13 +382,242 @@
             this.MontoFee.Name = "MontoFee";
             this.MontoFee.ReadOnly = true;
             // 
+            // groupMetodoPago
+            // 
+            this.groupMetodoPago.Controls.Add(this.radioButton2);
+            this.groupMetodoPago.Controls.Add(this.radioButton1);
+            this.groupMetodoPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupMetodoPago.ForeColor = System.Drawing.Color.Navy;
+            this.groupMetodoPago.Location = new System.Drawing.Point(557, 13);
+            this.groupMetodoPago.Name = "groupMetodoPago";
+            this.groupMetodoPago.Size = new System.Drawing.Size(360, 55);
+            this.groupMetodoPago.TabIndex = 2;
+            this.groupMetodoPago.TabStop = false;
+            this.groupMetodoPago.Text = "Método de Pago";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Location = new System.Drawing.Point(7, 20);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(109, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Estado de cuenta";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Location = new System.Drawing.Point(250, 20);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(94, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "Por conceptos";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // groupComisionAgente
+            // 
+            this.groupComisionAgente.Controls.Add(this.radioButton3);
+            this.groupComisionAgente.Controls.Add(this.radioButton4);
+            this.groupComisionAgente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupComisionAgente.ForeColor = System.Drawing.Color.Navy;
+            this.groupComisionAgente.Location = new System.Drawing.Point(557, 74);
+            this.groupComisionAgente.Name = "groupComisionAgente";
+            this.groupComisionAgente.Size = new System.Drawing.Size(360, 60);
+            this.groupComisionAgente.TabIndex = 3;
+            this.groupComisionAgente.TabStop = false;
+            this.groupComisionAgente.Text = "Pago de Comisión al Agente";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.Location = new System.Drawing.Point(6, 19);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(90, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "Líder al 100%";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton4.Location = new System.Drawing.Point(232, 19);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(122, 17);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.Text = "Pago a participación";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // groupSiniestros
+            // 
+            this.groupSiniestros.Controls.Add(this.lblMontoSiniestro);
+            this.groupSiniestros.Controls.Add(this.txtMontoSiniestro);
+            this.groupSiniestros.Controls.Add(this.label8);
+            this.groupSiniestros.Controls.Add(this.rdbSiniestro100);
+            this.groupSiniestros.Controls.Add(this.rdbSiniestroParticipacion);
+            this.groupSiniestros.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupSiniestros.ForeColor = System.Drawing.Color.Navy;
+            this.groupSiniestros.Location = new System.Drawing.Point(557, 141);
+            this.groupSiniestros.Name = "groupSiniestros";
+            this.groupSiniestros.Size = new System.Drawing.Size(360, 117);
+            this.groupSiniestros.TabIndex = 4;
+            this.groupSiniestros.TabStop = false;
+            this.groupSiniestros.Text = "Siniestros";
+            // 
+            // rdbSiniestroParticipacion
+            // 
+            this.rdbSiniestroParticipacion.AutoSize = true;
+            this.rdbSiniestroParticipacion.Checked = true;
+            this.rdbSiniestroParticipacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSiniestroParticipacion.Location = new System.Drawing.Point(7, 19);
+            this.rdbSiniestroParticipacion.Name = "rdbSiniestroParticipacion";
+            this.rdbSiniestroParticipacion.Size = new System.Drawing.Size(180, 17);
+            this.rdbSiniestroParticipacion.TabIndex = 4;
+            this.rdbSiniestroParticipacion.Text = "Pago del siniestro a participación";
+            this.rdbSiniestroParticipacion.UseVisualStyleBackColor = true;
+            this.rdbSiniestroParticipacion.CheckedChanged += new System.EventHandler(this.rdbSiniestroParticipacion_CheckedChanged);
+            // 
+            // rdbSiniestro100
+            // 
+            this.rdbSiniestro100.AutoSize = true;
+            this.rdbSiniestro100.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSiniestro100.Location = new System.Drawing.Point(7, 42);
+            this.rdbSiniestro100.Name = "rdbSiniestro100";
+            this.rdbSiniestro100.Size = new System.Drawing.Size(148, 17);
+            this.rdbSiniestro100.TabIndex = 4;
+            this.rdbSiniestro100.Text = "Pago del siniestro al 100%";
+            this.rdbSiniestro100.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(24, 76);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(131, 30);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Monto máximo para pago automático de siniestro";
+            // 
+            // txtMontoSiniestro
+            // 
+            this.txtMontoSiniestro.Enabled = false;
+            this.txtMontoSiniestro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMontoSiniestro.Location = new System.Drawing.Point(161, 82);
+            this.txtMontoSiniestro.Name = "txtMontoSiniestro";
+            this.txtMontoSiniestro.Size = new System.Drawing.Size(64, 20);
+            this.txtMontoSiniestro.TabIndex = 1;
+            this.txtMontoSiniestro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontoSiniestro_KeyPress);
+            // 
+            // lblMontoSiniestro
+            // 
+            this.lblMontoSiniestro.AutoSize = true;
+            this.lblMontoSiniestro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMontoSiniestro.Location = new System.Drawing.Point(256, 85);
+            this.lblMontoSiniestro.Name = "lblMontoSiniestro";
+            this.lblMontoSiniestro.Size = new System.Drawing.Size(37, 13);
+            this.lblMontoSiniestro.TabIndex = 2;
+            this.lblMontoSiniestro.Text = "$ 0.00";
+            // 
+            // groupGarantiaPago
+            // 
+            this.groupGarantiaPago.Controls.Add(this.cmbGarantiaPago);
+            this.groupGarantiaPago.Controls.Add(this.radioButton8);
+            this.groupGarantiaPago.Controls.Add(this.rdbContratoSeguro);
+            this.groupGarantiaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupGarantiaPago.ForeColor = System.Drawing.Color.Navy;
+            this.groupGarantiaPago.Location = new System.Drawing.Point(557, 265);
+            this.groupGarantiaPago.Name = "groupGarantiaPago";
+            this.groupGarantiaPago.Size = new System.Drawing.Size(360, 102);
+            this.groupGarantiaPago.TabIndex = 5;
+            this.groupGarantiaPago.TabStop = false;
+            this.groupGarantiaPago.Text = "Garantía de Pago";
+            // 
+            // rdbContratoSeguro
+            // 
+            this.rdbContratoSeguro.AutoSize = true;
+            this.rdbContratoSeguro.Checked = true;
+            this.rdbContratoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbContratoSeguro.Location = new System.Drawing.Point(7, 20);
+            this.rdbContratoSeguro.Name = "rdbContratoSeguro";
+            this.rdbContratoSeguro.Size = new System.Drawing.Size(259, 17);
+            this.rdbContratoSeguro.TabIndex = 0;
+            this.rdbContratoSeguro.Text = " De acuerdo a la Ley sobre el Contrato de Seguro";
+            this.rdbContratoSeguro.UseVisualStyleBackColor = true;
+            this.rdbContratoSeguro.CheckedChanged += new System.EventHandler(this.rdbContratoSeguro_CheckedChanged);
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton8.Location = new System.Drawing.Point(8, 44);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(108, 17);
+            this.radioButton8.TabIndex = 1;
+            this.radioButton8.Text = "Otro (especificar):";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // cmbGarantiaPago
+            // 
+            this.cmbGarantiaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGarantiaPago.Enabled = false;
+            this.cmbGarantiaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGarantiaPago.FormattingEnabled = true;
+            this.cmbGarantiaPago.Items.AddRange(new object[] {
+            "30 días",
+            "45 días",
+            "60 días"});
+            this.cmbGarantiaPago.Location = new System.Drawing.Point(122, 43);
+            this.cmbGarantiaPago.Name = "cmbGarantiaPago";
+            this.cmbGarantiaPago.Size = new System.Drawing.Size(121, 21);
+            this.cmbGarantiaPago.TabIndex = 2;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Location = new System.Drawing.Point(563, 430);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.btnSiguiente.TabIndex = 6;
+            this.btnSiguiente.Text = "Siguiente";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Location = new System.Drawing.Point(679, 430);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(75, 23);
+            this.btnAtras.TabIndex = 7;
+            this.btnAtras.Text = "Atrás";
+            this.btnAtras.UseVisualStyleBackColor = true;
+            // 
+            // btnSuspender
+            // 
+            this.btnSuspender.Location = new System.Drawing.Point(789, 430);
+            this.btnSuspender.Name = "btnSuspender";
+            this.btnSuspender.Size = new System.Drawing.Size(75, 23);
+            this.btnSuspender.TabIndex = 8;
+            this.btnSuspender.Text = "Suspender";
+            this.btnSuspender.UseVisualStyleBackColor = true;
+            // 
             // LiderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1049, 626);
+            this.ClientSize = new System.Drawing.Size(940, 626);
+            this.Controls.Add(this.btnSuspender);
+            this.Controls.Add(this.btnAtras);
+            this.Controls.Add(this.btnSiguiente);
+            this.Controls.Add(this.groupGarantiaPago);
+            this.Controls.Add(this.groupSiniestros);
+            this.Controls.Add(this.groupComisionAgente);
+            this.Controls.Add(this.groupMetodoPago);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -376,14 +628,22 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridCoaseguradoras)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridFee)).EndInit();
+            this.groupMetodoPago.ResumeLayout(false);
+            this.groupMetodoPago.PerformLayout();
+            this.groupComisionAgente.ResumeLayout(false);
+            this.groupComisionAgente.PerformLayout();
+            this.groupSiniestros.ResumeLayout(false);
+            this.groupSiniestros.PerformLayout();
+            this.groupGarantiaPago.ResumeLayout(false);
+            this.groupGarantiaPago.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -416,6 +676,25 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CompaniasFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn PorcentajeFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn MontoFee;
+        private System.Windows.Forms.GroupBox groupMetodoPago;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.GroupBox groupComisionAgente;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.GroupBox groupSiniestros;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtMontoSiniestro;
+        private System.Windows.Forms.RadioButton rdbSiniestro100;
+        private System.Windows.Forms.RadioButton rdbSiniestroParticipacion;
+        private System.Windows.Forms.Label lblMontoSiniestro;
+        private System.Windows.Forms.GroupBox groupGarantiaPago;
+        private System.Windows.Forms.RadioButton rdbContratoSeguro;
+        private System.Windows.Forms.ComboBox cmbGarantiaPago;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnAtras;
+        private System.Windows.Forms.Button btnSuspender;
     }
 }
 

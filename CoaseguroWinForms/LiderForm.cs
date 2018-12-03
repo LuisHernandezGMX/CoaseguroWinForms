@@ -84,5 +84,49 @@ namespace CoaseguroWinForms
                 };
             }
         }
+
+        /// <summary>
+        /// Se dispara este evento cuando se empieza a escribir el porcentaje del monto
+        /// máximo para pago automático de siniestro. Solamente deja entrar números
+        /// decimales en la caja de texto, y al mismo tiempo calcula el monto
+        /// de siniestro correspondiente.
+        /// </summary>
+        /// <param name="sender">La caja de texto donde se escribe el monto máximo.</param>
+        /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
+        private void txtMontoSiniestro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Activa y descativa la caja de texto del monto máximo de siniestro y reinicia el
+        /// valor que contiene su etiqueta correspondiente.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No es utilizado.</param>
+        private void rdbSiniestroParticipacion_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            if (radio.Checked) {
+                txtMontoSiniestro.Text = string.Empty;
+                txtMontoSiniestro.Enabled = false;
+                lblMontoSiniestro.Text = "$ 0.00";
+            } else {
+                txtMontoSiniestro.Enabled = true;
+            }
+        }
+
+        private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+            cmbGarantiaPago.Enabled = !radio.Checked;
+        }
     }
 }
