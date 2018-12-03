@@ -27,8 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -124,10 +124,10 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.62185F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.37815F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblMontoCoaseguradoras, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 203);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -138,17 +138,19 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Location = new System.Drawing.Point(3, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(186, 13);
+            this.label4.Size = new System.Drawing.Size(195, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "TOTAL DE LA PARTICIPACIÓN";
             // 
             // lblPorcentajeCoaseguradoras
             // 
+            this.lblPorcentajeCoaseguradoras.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblPorcentajeCoaseguradoras.AutoSize = true;
-            this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(196, 0);
+            this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(335, 5);
             this.lblPorcentajeCoaseguradoras.Name = "lblPorcentajeCoaseguradoras";
             this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(30, 13);
             this.lblPorcentajeCoaseguradoras.TabIndex = 1;
@@ -156,8 +158,9 @@
             // 
             // lblMontoCoaseguradoras
             // 
+            this.lblMontoCoaseguradoras.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblMontoCoaseguradoras.AutoSize = true;
-            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(356, 0);
+            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(406, 5);
             this.lblMontoCoaseguradoras.Name = "lblMontoCoaseguradoras";
             this.lblMontoCoaseguradoras.Size = new System.Drawing.Size(82, 13);
             this.lblMontoCoaseguradoras.TabIndex = 2;
@@ -172,14 +175,14 @@
             this.CompaniaCoaseguradoras,
             this.PorcentajeCoaseguradoras,
             this.MontoCoaseguradoras});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle7;
             this.gridCoaseguradoras.Location = new System.Drawing.Point(13, 20);
             this.gridCoaseguradoras.Name = "gridCoaseguradoras";
             this.gridCoaseguradoras.ReadOnly = true;
@@ -239,9 +242,10 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 21);
+            this.label5.Location = new System.Drawing.Point(3, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(243, 13);
             this.label5.TabIndex = 0;
@@ -249,8 +253,9 @@
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(258, 0);
+            this.label6.Location = new System.Drawing.Point(258, 4);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 1;
@@ -258,8 +263,9 @@
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(359, 0);
+            this.label7.Location = new System.Drawing.Point(359, 4);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(138, 13);
             this.label7.TabIndex = 2;
@@ -267,9 +273,10 @@
             // 
             // lblPorcentajeGMX
             // 
+            this.lblPorcentajeGMX.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblPorcentajeGMX.AutoSize = true;
             this.lblPorcentajeGMX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentajeGMX.Location = new System.Drawing.Point(258, 21);
+            this.lblPorcentajeGMX.Location = new System.Drawing.Point(326, 25);
             this.lblPorcentajeGMX.Name = "lblPorcentajeGMX";
             this.lblPorcentajeGMX.Size = new System.Drawing.Size(27, 13);
             this.lblPorcentajeGMX.TabIndex = 3;
@@ -277,9 +284,10 @@
             // 
             // lblParticipacionGMX
             // 
+            this.lblParticipacionGMX.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblParticipacionGMX.AutoSize = true;
             this.lblParticipacionGMX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParticipacionGMX.Location = new System.Drawing.Point(359, 21);
+            this.lblParticipacionGMX.Location = new System.Drawing.Point(427, 25);
             this.lblParticipacionGMX.Name = "lblParticipacionGMX";
             this.lblParticipacionGMX.Size = new System.Drawing.Size(70, 13);
             this.lblParticipacionGMX.TabIndex = 4;
@@ -346,14 +354,14 @@
             this.CompaniasFee,
             this.PorcentajeFee,
             this.MontoFee});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridFee.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridFee.DefaultCellStyle = dataGridViewCellStyle8;
             this.gridFee.Location = new System.Drawing.Point(7, 20);
             this.gridFee.Name = "gridFee";
             this.gridFee.Size = new System.Drawing.Size(520, 152);
