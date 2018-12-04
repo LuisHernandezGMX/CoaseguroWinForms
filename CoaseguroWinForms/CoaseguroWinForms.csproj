@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
+    <Compile Include="DAL\Entities\Enums.cs" />
     <Compile Include="LiderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

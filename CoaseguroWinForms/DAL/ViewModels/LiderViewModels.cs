@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CoaseguroWinForms.DAL.Entities;
+
+namespace CoaseguroWinForms.DAL.ViewModels.Lider
+{
+    /// <summary>
+    /// Almacena todo el estado que se maneja en el formulario <see cref="LiderForm"/>.
+    /// </summary>
+    public class LiderViewModel
+    {
+        /// <summary>
+        /// El límite máximo de responsabilidad. Este valor
+        /// se obtiene de la base de datos.
+        /// </summary>
+        public decimal LimiteMaxResponsabilidad { get; set; }
+
+        /// <summary>
+        /// La prima neta. Este valor se obtiene de la base
+        /// de datos.
+        /// </summary>
+        public decimal PrimaNeta { get; set; }
+
+        /// <summary>
+        /// El porcentaje de participación de GMX. Este valor
+        /// se obtiene de la base de datos.
+        /// </summary>
+        public decimal PorcentajeGMX { get; set; }
+
+        /// <summary>
+        /// El monto de participación de GMX. Este valor es
+        /// calculado.
+        /// </summary>
+        public decimal MontoGMX { get; set; }
+
+        /// <summary>
+        /// Las coaseguradoras seguidoras de GMX.
+        /// </summary>
+        public List<CoaseguradoraViewModel> Coaseguradoras { get; set; }
+
+        /// <summary>
+        /// El método de pago.
+        /// </summary>
+        public MetodoPago MetodoPago { get; set; }
+
+        /// <summary>
+        /// La forma del pago de comisión al agente.
+        /// </summary>
+        public PagoComisionAgente PagoComisionAgente { get; set; }
+    }
+
+    /// <summary>
+    /// Representa una coaseguradora en el formulario.
+    /// </summary>
+    public class CoaseguradoraViewModel
+    {
+        /// <summary>
+        /// El Id de la coaseguradora.
+        /// Viene de la base de datos.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// El nombre de la coaseguradora.
+        /// Viene de la base de datos.
+        /// </summary>
+        public string Nombre { get; set; }
+
+        /// <summary>
+        /// El porcentaje de participación de la coaseguradora.
+        /// Viene de la base de datos.
+        /// </summary>
+        public decimal PorcentajeParticipacion { get; set; }
+
+        /// <summary>
+        /// El monto de participación de la coaseguradora.
+        /// Este valor es calculado.
+        /// </summary>
+        public decimal MontoParticipacion { get; set; }
+
+        /// <summary>
+        /// El porcentaje de Fee de la coaseguradora.
+        /// Este valor es ingresado por el usuario.
+        /// </summary>
+        public decimal PorcentajeFee { get; set; }
+
+        /// <summary>
+        /// El monto de Fee de la coaseguradora.
+        /// Este valor es calculado.
+        /// </summary>
+        public decimal MontoFee { get; set; }
+    }
+}
