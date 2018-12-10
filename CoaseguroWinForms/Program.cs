@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CoaseguroWinForms
@@ -31,7 +28,7 @@ namespace CoaseguroWinForms
             if (esLider) {
                 Application.Run(new LiderForm(sCommand, idPv));
             } else {
-
+                Application.Run(new SeguidorForm(sCommand, idPv));
             }
         }
     }

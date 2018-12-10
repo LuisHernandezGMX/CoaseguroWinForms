@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeguidorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeguidorForm.Designer.cs">
+      <DependentUpon>SeguidorForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LiderForm.resx">
       <DependentUpon>LiderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SeguidorForm.resx">
+      <DependentUpon>SeguidorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
