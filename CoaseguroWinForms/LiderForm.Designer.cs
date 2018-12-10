@@ -78,6 +78,12 @@
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnSuspender = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblNombreUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblEntorno = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,6 +97,7 @@
             this.groupComisionAgente.SuspendLayout();
             this.groupSiniestros.SuspendLayout();
             this.groupGarantiaPago.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -651,6 +658,7 @@
             this.btnSiguiente.TabIndex = 6;
             this.btnSiguiente.Text = "Siguiente";
             this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
             // 
             // btnAtras
             // 
@@ -660,6 +668,7 @@
             this.btnAtras.TabIndex = 7;
             this.btnAtras.Text = "Atrás";
             this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
             // btnSuspender
             // 
@@ -669,6 +678,7 @@
             this.btnSuspender.TabIndex = 8;
             this.btnSuspender.Text = "Suspender";
             this.btnSuspender.UseVisualStyleBackColor = true;
+            this.btnSuspender.Click += new System.EventHandler(this.btnSuspender_Click);
             // 
             // label10
             // 
@@ -680,13 +690,60 @@
             this.label10.TabIndex = 5;
             this.label10.Text = "%";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblNombreUsuario,
+            this.toolStripStatusLabel3,
+            this.lblEntorno});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 656);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(940, 22);
+            this.statusStrip1.TabIndex = 9;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Text = "Usuario:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 633);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(0, 13);
+            this.label11.TabIndex = 10;
+            // 
+            // lblNombreUsuario
+            // 
+            this.lblNombreUsuario.Name = "lblNombreUsuario";
+            this.lblNombreUsuario.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(54, 17);
+            this.toolStripStatusLabel3.Text = "Entorno:";
+            // 
+            // lblEntorno
+            // 
+            this.lblEntorno.Name = "lblEntorno";
+            this.lblEntorno.Size = new System.Drawing.Size(0, 17);
+            // 
             // LiderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(940, 626);
+            this.ClientSize = new System.Drawing.Size(940, 678);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnSuspender);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnSiguiente);
@@ -721,7 +778,10 @@
             this.groupSiniestros.PerformLayout();
             this.groupGarantiaPago.ResumeLayout(false);
             this.groupGarantiaPago.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -776,6 +836,12 @@
         private System.Windows.Forms.Label lblPrimaNeta;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolStripStatusLabel lblNombreUsuario;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel lblEntorno;
     }
 }
 

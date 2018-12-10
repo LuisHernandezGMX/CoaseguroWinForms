@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sistran.Data;
 using CoaseguroWinForms.DAL.Entities;
 using CoaseguroWinForms.DAL.ViewModels.Lider;
 
@@ -52,6 +53,14 @@ namespace CoaseguroWinForms
             InitializeComponent();
             InicializarInformacionFormulario();
             InicializarCmbGarantiaPago();
+
+            // Conexión SII
+            var connection = new Conecction();
+            connection.GetStringConnection(sCommand);
+
+            lblNombreUsuario.Text = connection.User;
+            lblEntorno.Text = connection.Base;
+            connection = null;
         }
 
         /// <summary>
@@ -329,6 +338,21 @@ namespace CoaseguroWinForms
         {
             var combo = sender as ComboBox;
             model.GarantiaPago = combo.SelectedValue as DiasGarantiaPago?;
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnSuspender_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
