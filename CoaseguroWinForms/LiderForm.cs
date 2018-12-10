@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CoaseguroWinForms.DAL.Entities;
@@ -52,6 +51,26 @@ namespace CoaseguroWinForms
 
             InitializeComponent();
             InicializarInformacionFormulario();
+            InicializarCmbGarantiaPago();
+        }
+
+        /// <summary>
+        /// Llena el ComboBox de los días para la garantía de pago con los
+        /// valores necesarios.
+        /// </summary>
+        private void InicializarCmbGarantiaPago()
+        {
+            cmbGarantiaPago.DisplayMember = "Name";
+            cmbGarantiaPago.ValueMember = "ValorEnum";
+            cmbGarantiaPago.DataSource = Enum
+                .GetValues(typeof(DiasGarantiaPago))
+                .Cast<Enum>()
+                .Select(valor => new {
+                    (Attribute.GetCustomAttribute(valor.GetType().GetField(valor.ToString()), typeof(DisplayAttribute)) as DisplayAttribute).Name,
+                    ValorEnum = valor
+                })
+                .OrderBy(v => v.ValorEnum)
+                .ToList();
         }
 
         /// <summary>
@@ -62,10 +81,11 @@ namespace CoaseguroWinForms
             // ViewModel de Prueba (el real se llena con los datos de la base de datos.)
             model = new LiderViewModel {
                 LimiteMaxResponsabilidad = 1000000,
-                PrimaNeta = 1000000,
+                PrimaNeta = 200000,
                 PorcentajeGMX = 70,
                 MetodoPago = MetodoPago.EstadoCuenta,
-                PagoComisionAgente = PagoComisionAgente.Lider100
+                PagoComisionAgente = PagoComisionAgente.Lider100,
+                PorcentajePagoSiniestro = null
             };
             
             model.Coaseguradoras = new List<CoaseguradoraViewModel> {
@@ -143,9 +163,9 @@ namespace CoaseguroWinForms
         /// coaseguradora. Solamente deja entrar números decimales en la caja de texto, y al
         /// mismo tiempo calcula el monto de Fee correspondiente.
         /// </summary>
-        /// <param name="_">No utilizado.</param>
+        /// <param name="sender">No utilizado.</param>
         /// <param name="e">El objeto editable al cuál se le agregará su función de retrollamada.</param>
-        private void gridFee_EditingControlShowing(object _, DataGridViewEditingControlShowingEventArgs e)
+        private void gridFee_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (!eventoFeeActivado) {
                 eventoFeeActivado = true;
@@ -169,21 +189,22 @@ namespace CoaseguroWinForms
                         ? 0M
                         : decimal.Parse(textBox.Text);
 
-                    if (porcentaje > 100M || porcentaje < 0M) {
-                        MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
-                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);;
-
-                        textBox.Clear();
-                        return;
-                    }
-
                     var idCoaseguradora = (int)gridFee.CurrentCell.Tag;
                     var coaseguradora = model.Coaseguradoras.FirstOrDefault(coas => coas.Id == idCoaseguradora);
+                    var lblMonto = gridFee.CurrentCell.OwningRow.Cells[2];
 
-                    coaseguradora.PorcentajeFee = porcentaje;
-                    coaseguradora.MontoFee = decimal.Round(model.PrimaNeta * porcentaje / 100, 2);
+                    if (porcentaje > 100M || porcentaje < 0M) {
+                        MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                    gridFee.CurrentCell.OwningRow.Cells[2].Value = $"$ {coaseguradora.MontoFee.ToString("N2")}";
+                        coaseguradora.PorcentajeFee = coaseguradora.MontoFee = 0M;
+                        lblMonto.Value = "$ 0.00";
+                        textBox.Clear();
+                    } else {
+                        coaseguradora.PorcentajeFee = porcentaje;
+                        coaseguradora.MontoFee = decimal.Round(model.PrimaNeta * porcentaje / 100, 2);
+                        lblMonto.Value = $"$ {coaseguradora.MontoFee.ToString("N2")}";
+                    }
                 };
             }
         }
@@ -194,7 +215,7 @@ namespace CoaseguroWinForms
         /// decimales en la caja de texto, y al mismo tiempo calcula el monto
         /// de siniestro correspondiente.
         /// </summary>
-        /// <param name="sender">La caja de texto donde se escribe el monto máximo.</param>
+        /// <param name="sender">La caja de texto donde se escribe el porcentaje.</param>
         /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
         private void txtMontoSiniestro_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -204,6 +225,27 @@ namespace CoaseguroWinForms
 
             if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
                 e.Handled = true;
+            }
+        }
+
+        private void txtMontoSiniestro_KeyUp(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
+                        ? 0M
+                        : decimal.Parse(textBox.Text);
+
+            if (porcentaje > 100M || porcentaje < 0M) {
+                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                lblMontoSiniestro.Text = "$ 0.00";
+                model.PorcentajePagoSiniestro = 0M;
+                textBox.Clear();
+            } else {
+                model.PorcentajePagoSiniestro = porcentaje;
+                var monto = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
+                lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
             }
         }
 
@@ -221,17 +263,38 @@ namespace CoaseguroWinForms
                 txtMontoSiniestro.Text = string.Empty;
                 txtMontoSiniestro.Enabled = false;
                 lblMontoSiniestro.Text = "$ 0.00";
+                model.PorcentajePagoSiniestro = null;
             } else {
                 txtMontoSiniestro.Enabled = true;
+                model.PorcentajePagoSiniestro = 0M;
             }
         }
 
+        /// <summary>
+        /// Activa y desactiva el ComboBox para la Garantía de Pago y asigna el valor correspondiente
+        /// al VistaModelo del formulario.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No es utilizado.</param>
         private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
         {
             var radio = sender as RadioButton;
-            cmbGarantiaPago.Enabled = !radio.Checked;
+
+            if (radio.Checked) {
+                model.GarantiaPago = null;
+                cmbGarantiaPago.Enabled = false;
+            } else {
+                model.GarantiaPago = cmbGarantiaPago.SelectedValue as DiasGarantiaPago?;
+                cmbGarantiaPago.Enabled = true;
+            }
         }
 
+        /// <summary>
+        /// Asigna el nuevo valor del Método de Pago al vista modelo
+        /// cada vez que se selecciona un RadioButton.
+        /// </summary>
+        /// <param name="sender">El RadioButton del estado de cuenta en la sección Método de Pago.</param>
+        /// <param name="e">No se utiliza.</param>
         private void rdbEstadoCuenta_CheckedChanged(object sender, EventArgs e)
         {
             var radio = sender as RadioButton;
@@ -241,6 +304,12 @@ namespace CoaseguroWinForms
                 : MetodoPago.Conceptos;
         }
 
+        /// <summary>
+        /// Asigna el nuevo valor del Pago de Comisión al Agente al vista modelo
+        /// cada vez que se selecciona un RadioButton.
+        /// </summary>
+        /// <param name="sender">El RadioButton del líder al 100% en la sección Pago de Comisión al Agente.</param>
+        /// <param name="e">No se utiliza.</param>
         private void rdbLider100_CheckedChanged(object sender, EventArgs e)
         {
             var radio = sender as RadioButton;
@@ -248,6 +317,18 @@ namespace CoaseguroWinForms
             model.PagoComisionAgente = radio.Checked
                 ? PagoComisionAgente.Lider100
                 : PagoComisionAgente.Participacion;
+        }
+
+        /// <summary>
+        /// Asigna el nuevo valor de los días de Garantía de Pago al vista modelo
+        /// cada vez que se selecciona una opción del ComboBox.
+        /// </summary>
+        /// <param name="sender">El ComboBox de los días en la sección Garantía de Pago.</param>
+        /// <param name="e">No se utiliza.</param>
+        private void cmbGarantiaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combo = sender as ComboBox;
+            model.GarantiaPago = combo.SelectedValue as DiasGarantiaPago?;
         }
     }
 }

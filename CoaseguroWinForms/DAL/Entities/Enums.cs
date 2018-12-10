@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoaseguroWinForms.DAL.Entities
 {
@@ -22,5 +23,21 @@ namespace CoaseguroWinForms.DAL.Entities
     {
         Lider100,
         Participacion
+    }
+
+    /// <summary>
+    /// Los días que se tienen disponibles para realizar el
+    /// pago del siniestro.
+    /// </summary>
+    public enum DiasGarantiaPago
+    {
+        [Display(Name = "30 días")]
+        TreintaDias,
+
+        [Display(Name = "45 días")]
+        CuarentaycincoDias,
+
+        [Display(Name = "60 días")]
+        SesentaDias
     }
 }

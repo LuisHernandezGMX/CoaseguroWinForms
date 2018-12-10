@@ -50,6 +50,22 @@ namespace CoaseguroWinForms.DAL.ViewModels.Lider
         /// La forma del pago de comisión al agente.
         /// </summary>
         public PagoComisionAgente PagoComisionAgente { get; set; }
+
+        /// <summary>
+        /// Porcentaje del monto máximo para pago automático de siniestro.
+        /// Este campo contiene el porcentaje SOLO si se eligió la opción
+        /// correspondiente. Si el pago del siniestro se hace a participación,
+        /// este campo deberá ser NULO.
+        /// </summary>
+        public decimal? PorcentajePagoSiniestro { get; set; }
+
+        /// <summary>
+        /// Garantía de pago del siniestro. Si la garantía se hace de acuerdo
+        /// a la Ley sobre el Contrato de Seguro este campo deberá ser NULO. De
+        /// lo contrario, contiene el valor correspondiente de la enumeración, la
+        /// cual equivale a los días que se tienen para realizar el pago del siniestro.
+        /// </summary>
+        public DiasGarantiaPago? GarantiaPago { get; set; }
     }
 
     /// <summary>
