@@ -60,7 +60,6 @@ namespace CoaseguroWinForms
 
             lblNombreUsuario.Text = connection.User;
             lblEntorno.Text = connection.Base;
-            connection = null;
         }
 
         /// <summary>
@@ -226,7 +225,7 @@ namespace CoaseguroWinForms
         /// </summary>
         /// <param name="sender">La caja de texto donde se escribe el porcentaje.</param>
         /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
-        private void txtMontoSiniestro_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPorcentajeSiniestro_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
                 e.Handled = true;
@@ -237,12 +236,12 @@ namespace CoaseguroWinForms
             }
         }
 
-        private void txtMontoSiniestro_KeyUp(object sender, KeyEventArgs e)
+        private void txtPorcentajeSiniestro_KeyUp(object sender, KeyEventArgs e)
         {
             var textBox = sender as TextBox;
             var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                        ? 0M
-                        : decimal.Parse(textBox.Text);
+                ? 0M
+                : decimal.Parse(textBox.Text);
 
             if (porcentaje > 100M || porcentaje < 0M) {
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
@@ -269,12 +268,12 @@ namespace CoaseguroWinForms
             var radio = sender as RadioButton;
 
             if (radio.Checked) {
-                txtMontoSiniestro.Text = string.Empty;
-                txtMontoSiniestro.Enabled = false;
+                txtPorcentajeSiniestro.Text = string.Empty;
+                txtPorcentajeSiniestro.Enabled = false;
                 lblMontoSiniestro.Text = "$ 0.00";
                 model.PorcentajePagoSiniestro = null;
             } else {
-                txtMontoSiniestro.Enabled = true;
+                txtPorcentajeSiniestro.Enabled = true;
                 model.PorcentajePagoSiniestro = 0M;
             }
         }
