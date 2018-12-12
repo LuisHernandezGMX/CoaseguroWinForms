@@ -93,7 +93,8 @@ namespace CoaseguroWinForms
                 PorcentajeGMX = 70,
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
-                PorcentajePagoSiniestro = null
+                PorcentajePagoSiniestro = null,
+                GarantiaPago = null
             };
             
             model.Coaseguradoras = new List<CoaseguradoraViewModel> {

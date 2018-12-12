@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Sistran.Data;
+using CoaseguroWinForms.DAL.Entities;
+using CoaseguroWinForms.DAL.ViewModels.Seguidor;
 
 namespace CoaseguroWinForms
 {
@@ -23,7 +22,12 @@ namespace CoaseguroWinForms
         /// <summary>
         /// El Id de la póliza a editar.
         /// </summary>
-        int idPv;
+        private int idPv;
+
+        /// <summary>
+        /// Almacena todo el estado del formulario.
+        /// </summary>
+        private SeguidorViewModel model;
         #endregion
 
         /// <summary>
@@ -37,6 +41,8 @@ namespace CoaseguroWinForms
             this.idPv = idPv;
 
             InitializeComponent();
+            InicializarInformacionFormulario();
+            InicializarCmbGarantiaPago();
 
             // Conexión SII
             var connection = new Conecction();
@@ -47,11 +53,39 @@ namespace CoaseguroWinForms
         }
 
         /// <summary>
+        /// Llena el ComboBox de los días para la garantía de pago con los
+        /// valores necesarios.
+        /// </summary>
+        private void InicializarCmbGarantiaPago()
+        {
+            cmbGarantiaPago.DisplayMember = "Name";
+            cmbGarantiaPago.ValueMember = "ValorEnum";
+            cmbGarantiaPago.DataSource = Enum
+                .GetValues(typeof(DiasGarantiaPago))
+                .Cast<Enum>()
+                .Select(valor => new {
+                    (Attribute.GetCustomAttribute(valor.GetType().GetField(valor.ToString()), typeof(DisplayAttribute)) as DisplayAttribute).Name,
+                    ValorEnum = valor
+                })
+                .OrderBy(v => v.ValorEnum)
+                .ToList();
+        }
+
+        /// <summary>
         /// Llena el formulario con la información inicial traída de la base de datos.
         /// </summary>
         private void InicializarInformacionFormulario()
         {
+            // ViewModel de Prueba (el real se llena con los datos de la base de datos.)
+            model = new SeguidorViewModel {
+                PrimaNeta = 200000,
+                MetodoPago = MetodoPago.EstadoCuenta,
+                PagoComisionAgente = PagoComisionAgente.Lider100,
+                PorcentajePagoSiniestro = null,
+                GarantiaPago = null
+            };
 
+            lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
         }
 
         /// <summary>
@@ -88,50 +122,10 @@ namespace CoaseguroWinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 // TODO: Actualización de todos los observadores y vista modelo a 0.
+                model.LimiteMaxResponsabilidad = 0M;
             } else {
                 // TODO: Actualización de los obervadores y del vista modelo con sus nuevos valores.
-            }
-        }
-
-        /// <summary>
-        /// Se dispara este evento cuando se empieza a escribir el porcentaje del Fee por administración
-        /// de GMX. Solamente deja entrar números decimales y al mismo tiempo calcula el monto de Fee de
-        /// GMX.
-        /// </summary>
-        /// <param name="sender">La caja de texto donde se escribe el porcentaje del Fee.</param>
-        /// <param name="e">La tecla que fue presionada.</param>
-        private void txtPorcentajeFeeGMX_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
-                e.Handled = true;
-            }
-
-            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
-                e.Handled = true;
-            }
-
-            if ((e.KeyChar == '.') && string.IsNullOrWhiteSpace((sender as TextBox).Text)) {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPorcentajeFeeGMX_KeyUp(object sender, KeyEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
-
-            if (porcentaje < 0M || porcentaje > 100M) {
-                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                // TODO: Actualización del vista modelo
-                lblMontoFeeGMX.Text = "$0.00";
-                textBox.Clear();
-            } else {
-                // TODO: Cálculo del monto de Fee y actualización del vista modelo.
-                lblMontoFeeGMX.Text = $"$ {porcentaje.ToString("N2")}";
+                model.LimiteMaxResponsabilidad = monto;
             }
         }
 
@@ -169,11 +163,102 @@ namespace CoaseguroWinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 // TODO: Actualización del vista modelo y observadores
+                model.MontoGMX = model.PorcentajeGMX = 0M;
                 lblMontoGMX.Text = "$ 0.00";
                 textBox.Clear();
             } else {
                 // TODO: Cálculo del monto de Fee y actualización del vista modelo y observadores.
-                lblMontoGMX.Text = $"$ {porcentaje.ToString("N2")}";
+                model.PorcentajeGMX = porcentaje;
+                model.MontoGMX = decimal.Round(porcentaje * model.LimiteMaxResponsabilidad / 100M, 2);
+                lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
+            }
+        }
+
+        /// <summary>
+        /// Se dispara este evento cuando se empieza a escribir el porcentaje del Fee por administración
+        /// de GMX. Solamente deja entrar números decimales y al mismo tiempo calcula el monto de Fee de
+        /// GMX.
+        /// </summary>
+        /// <param name="sender">La caja de texto donde se escribe el porcentaje del Fee.</param>
+        /// <param name="e">La tecla que fue presionada.</param>
+        private void txtPorcentajeFeeGMX_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && string.IsNullOrWhiteSpace((sender as TextBox).Text)) {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPorcentajeFeeGMX_KeyUp(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
+                ? 0M
+                : decimal.Parse(textBox.Text);
+
+            if (porcentaje < 0M || porcentaje > 100M) {
+                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                model.PorcentajeFeeGMX = model.MontoFeeGMX = 0M;
+                lblMontoFeeGMX.Text = "$0.00";
+                textBox.Clear();
+            } else {
+                model.PorcentajeFeeGMX = porcentaje;
+                model.MontoFeeGMX = decimal.Round(porcentaje * model.PrimaNeta / 100M, 2);
+                lblMontoFeeGMX.Text = $"$ {model.MontoFeeGMX.ToString("N2")}";
+            }
+        }
+
+        /// <summary>
+        /// Asigna el nuevo valor del Método de Pago al vista modelo
+        /// cada vez que se selecciona un RadioButton.
+        /// </summary>
+        /// <param name="sender">El RadioButton del estado de cuenta en la sección Método de Pago.</param>
+        /// <param name="e">No se utiliza.</param>
+        private void rdbEstadoCuenta_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            model.MetodoPago = radio.Checked
+                ? MetodoPago.EstadoCuenta
+                : MetodoPago.Conceptos;
+        }
+
+        /// <summary>
+        /// Asigna el nuevo valor del Pago de Comisión al Agente al vista modelo
+        /// cada vez que se selecciona un RadioButton.
+        /// </summary>
+        /// <param name="sender">El RadioButton del líder al 100% en la sección Pago de Comisión al Agente.</param>
+        /// <param name="e">No se utiliza.</param>
+        private void rdbLider100_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            model.PagoComisionAgente = radio.Checked
+                ? PagoComisionAgente.Lider100
+                : PagoComisionAgente.Participacion;
+        }
+
+        private void rdbSiniestroParticipacion_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            if (radio.Checked) {
+                model.PorcentajePagoSiniestro = null;
+                lblMontoSiniestro.Text = "$ 0.00";
+                txtPorcentajeSiniestro.Clear();
+                txtPorcentajeSiniestro.Enabled = false;
+            } else {
+                model.PorcentajePagoSiniestro = 0M;
+                txtPorcentajeSiniestro.Enabled = true;
             }
         }
 
@@ -209,27 +294,45 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                // TODO: Actualización del vista modelo
+                model.PorcentajePagoSiniestro = 0M;
                 lblMontoSiniestro.Text = "$ 0.00";
                 textBox.Clear();
             } else {
-                // TODO: Cálculo del monto de siniestro y actualización del vista modelo.
-                lblMontoSiniestro.Text = $"$ {porcentaje.ToString("N2")}";
+                model.PorcentajePagoSiniestro = porcentaje;
+                var monto = decimal.Round(porcentaje * model.MontoGMX / 100M, 2);
+                lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
             }
         }
 
-        private void rdbSiniestroParticipacion_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Activa y desactiva el ComboBox para la Garantía de Pago y asigna el valor correspondiente
+        /// al VistaModelo del formulario.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No es utilizado.</param>
+        private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
         {
             var radio = sender as RadioButton;
 
-            // TODO: Actualizar vista modelo
             if (radio.Checked) {
-                lblMontoSiniestro.Text = "$ 0.00";
-                txtPorcentajeSiniestro.Clear();
-                txtPorcentajeSiniestro.Enabled = false;
+                model.GarantiaPago = null;
+                cmbGarantiaPago.Enabled = false;
             } else {
-                txtPorcentajeSiniestro.Enabled = true;
+                model.GarantiaPago = cmbGarantiaPago.SelectedValue as DiasGarantiaPago?;
+                cmbGarantiaPago.Enabled = true;
             }
+        }
+
+        /// <summary>
+        /// Asigna el nuevo valor de los días de Garantía de Pago al vista modelo
+        /// cada vez que se selecciona una opción del ComboBox.
+        /// </summary>
+        /// <param name="sender">El ComboBox de los días en la sección Garantía de Pago.</param>
+        /// <param name="e">No se utiliza.</param>
+        private void cmbGarantiaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combo = sender as ComboBox;
+            model.GarantiaPago = combo.SelectedValue as DiasGarantiaPago?;
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
@@ -245,18 +348,6 @@ namespace CoaseguroWinForms
         private void btnSuspender_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
-        {
-            var radio = sender as RadioButton;
-
-            // TODO: Actualizar vista modelo.
-            if (radio.Checked) {
-                cmbGarantiaPago.Enabled = false;
-            } else {
-                cmbGarantiaPago.Enabled = true;
-            }
         }
     }
 }

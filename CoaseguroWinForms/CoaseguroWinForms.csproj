@@ -66,8 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
     <Compile Include="DAL\Entities\Enums.cs" />
+    <Compile Include="DAL\ViewModels\SeguidorViewModels.cs" />
     <Compile Include="LiderForm.cs">
       <SubType>Form</SubType>
     </Compile>
