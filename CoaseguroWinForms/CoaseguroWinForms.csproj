@@ -66,6 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Observers\GMXSubjectObserver.cs" />
+    <Compile Include="Business\Observers\IObservador.cs" />
+    <Compile Include="Business\Observers\ISujeto.cs" />
+    <Compile Include="Business\Observers\LimiteMaximoResponsabilidadSubject.cs" />
+    <Compile Include="Business\Observers\SiniestroObserver.cs" />
     <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
     <Compile Include="DAL\Entities\Enums.cs" />
@@ -112,9 +117,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>

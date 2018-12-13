@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Sistran.Data;
 using CoaseguroWinForms.DAL.Entities;
+using CoaseguroWinForms.Business.Observers;
 using CoaseguroWinForms.DAL.ViewModels.Seguidor;
 
 namespace CoaseguroWinForms
@@ -28,6 +29,17 @@ namespace CoaseguroWinForms
         /// Almacena todo el estado del formulario.
         /// </summary>
         private SeguidorViewModel model;
+
+        /// <summary>
+        /// Subjeto principal, el cual propagará todos los cambios en el formulario.
+        /// </summary>
+        private LimiteMaximoResponsabilidadSubject sujetoLimiteMax;
+
+        /// <summary>
+        /// Sujeto-Observador de la participación de GMX.
+        /// </summary>
+        private GMXSubjectObserver gmxSubObs;
+
         #endregion
 
         /// <summary>
@@ -43,6 +55,7 @@ namespace CoaseguroWinForms
             InitializeComponent();
             InicializarInformacionFormulario();
             InicializarCmbGarantiaPago();
+            InicializarSujetosYObservadores();
 
             // Conexión SII
             var connection = new Conecction();
@@ -89,6 +102,18 @@ namespace CoaseguroWinForms
         }
 
         /// <summary>
+        /// Inicializa los sujetos y sujetos-observadores de este formulario.
+        /// </summary>
+        private void InicializarSujetosYObservadores()
+        {
+            sujetoLimiteMax = new LimiteMaximoResponsabilidadSubject();
+            gmxSubObs = new GMXSubjectObserver(model, lblMontoGMX);
+
+            sujetoLimiteMax.RegistrarObservador(gmxSubObs);
+            gmxSubObs.RegistrarObservador(new SiniestroObserver(model, lblMontoSiniestro));
+        }
+
+        /// <summary>
         /// Se dispara este evento cuando se empieza a escribir el monto del límite máximo de
         /// responsabilidad al 100%. Solamente deja entrar números decimales en la caja de texto,
         /// y al mismo tiempo calcula todos los montos del formulario que tomen como base este valor.
@@ -121,12 +146,12 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "El monto debe ser mayor a $ 0.00", "Monto Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                // TODO: Actualización de todos los observadores y vista modelo a 0.
                 model.LimiteMaxResponsabilidad = 0M;
             } else {
-                // TODO: Actualización de los obervadores y del vista modelo con sus nuevos valores.
                 model.LimiteMaxResponsabilidad = monto;
             }
+
+            sujetoLimiteMax.Notificar(model.LimiteMaxResponsabilidad);
         }
 
         /// <summary>
@@ -162,16 +187,16 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                // TODO: Actualización del vista modelo y observadores
                 model.MontoGMX = model.PorcentajeGMX = 0M;
                 lblMontoGMX.Text = "$ 0.00";
                 textBox.Clear();
             } else {
-                // TODO: Cálculo del monto de Fee y actualización del vista modelo y observadores.
                 model.PorcentajeGMX = porcentaje;
                 model.MontoGMX = decimal.Round(porcentaje * model.LimiteMaxResponsabilidad / 100M, 2);
                 lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
             }
+
+            gmxSubObs.Notificar(model.MontoGMX);
         }
 
         /// <summary>
