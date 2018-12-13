@@ -1,11 +1,9 @@
 ﻿using System;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Sistran.Data;
 using CoaseguroWinForms.DAL.Entities;
 using CoaseguroWinForms.DAL.ViewModels.Lider;
@@ -193,10 +191,9 @@ namespace CoaseguroWinForms
 
                 // Una vez que la caja de texto tiene la cantidad completa, se realiza el cálculo del Fee correspondiente.
                 control.KeyUp += (send, ev) => {
+                    decimal porcentaje;
                     var textBox = send as TextBox;
-                    var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                        ? 0M
-                        : decimal.Parse(textBox.Text);
+                    decimal.TryParse(textBox.Text, out porcentaje);
 
                     var idCoaseguradora = (int)gridFee.CurrentCell.Tag;
                     var coaseguradora = model.Coaseguradoras.FirstOrDefault(coas => coas.Id == idCoaseguradora);
@@ -215,86 +212,6 @@ namespace CoaseguroWinForms
                         lblMonto.Value = $"$ {coaseguradora.MontoFee.ToString("N2")}";
                     }
                 };
-            }
-        }
-
-        /// <summary>
-        /// Se dispara este evento cuando se empieza a escribir el porcentaje del monto
-        /// máximo para pago automático de siniestro. Solamente deja entrar números
-        /// decimales en la caja de texto, y al mismo tiempo calcula el monto
-        /// de siniestro correspondiente.
-        /// </summary>
-        /// <param name="sender">La caja de texto donde se escribe el porcentaje.</param>
-        /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
-        private void txtPorcentajeSiniestro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
-                e.Handled = true;
-            }
-
-            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPorcentajeSiniestro_KeyUp(object sender, KeyEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
-
-            if (porcentaje > 100M || porcentaje < 0M) {
-                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                lblMontoSiniestro.Text = "$ 0.00";
-                model.PorcentajePagoSiniestro = 0M;
-                textBox.Clear();
-            } else {
-                model.PorcentajePagoSiniestro = porcentaje;
-                var monto = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
-                lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
-            }
-        }
-
-        /// <summary>
-        /// Activa y descativa la caja de texto del monto máximo de siniestro y reinicia el
-        /// valor que contiene su etiqueta correspondiente.
-        /// </summary>
-        /// <param name="sender">El RadioButton que originó el evento.</param>
-        /// <param name="e">No es utilizado.</param>
-        private void rdbSiniestroParticipacion_CheckedChanged(object sender, EventArgs e)
-        {
-            var radio = sender as RadioButton;
-
-            if (radio.Checked) {
-                txtPorcentajeSiniestro.Text = string.Empty;
-                txtPorcentajeSiniestro.Enabled = false;
-                lblMontoSiniestro.Text = "$ 0.00";
-                model.PorcentajePagoSiniestro = null;
-            } else {
-                txtPorcentajeSiniestro.Enabled = true;
-                model.PorcentajePagoSiniestro = 0M;
-            }
-        }
-
-        /// <summary>
-        /// Activa y desactiva el ComboBox para la Garantía de Pago y asigna el valor correspondiente
-        /// al VistaModelo del formulario.
-        /// </summary>
-        /// <param name="sender">El RadioButton que originó el evento.</param>
-        /// <param name="e">No es utilizado.</param>
-        private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
-        {
-            var radio = sender as RadioButton;
-
-            if (radio.Checked) {
-                model.GarantiaPago = null;
-                cmbGarantiaPago.Enabled = false;
-            } else {
-                model.GarantiaPago = cmbGarantiaPago.SelectedValue as DiasGarantiaPago?;
-                cmbGarantiaPago.Enabled = true;
             }
         }
 
@@ -326,6 +243,85 @@ namespace CoaseguroWinForms
             model.PagoComisionAgente = radio.Checked
                 ? PagoComisionAgente.Lider100
                 : PagoComisionAgente.Participacion;
+        }
+
+        /// <summary>
+        /// Activa y descativa la caja de texto del monto máximo de siniestro y reinicia el
+        /// valor que contiene su etiqueta correspondiente.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No es utilizado.</param>
+        private void rdbSiniestroParticipacion_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            if (radio.Checked) {
+                txtPorcentajeSiniestro.Text = string.Empty;
+                txtPorcentajeSiniestro.Enabled = false;
+                lblMontoSiniestro.Text = "$ 0.00";
+                model.PorcentajePagoSiniestro = null;
+            } else {
+                txtPorcentajeSiniestro.Enabled = true;
+                model.PorcentajePagoSiniestro = 0M;
+            }
+        }
+
+        /// <summary>
+        /// Se dispara este evento cuando se empieza a escribir el porcentaje del monto
+        /// máximo para pago automático de siniestro. Solamente deja entrar números
+        /// decimales en la caja de texto, y al mismo tiempo calcula el monto
+        /// de siniestro correspondiente.
+        /// </summary>
+        /// <param name="sender">La caja de texto donde se escribe el porcentaje.</param>
+        /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
+        private void txtPorcentajeSiniestro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPorcentajeSiniestro_KeyUp(object sender, KeyEventArgs e)
+        {
+            decimal porcentaje;
+            var textBox = sender as TextBox;
+            decimal.TryParse(textBox.Text, out porcentaje);
+
+            if (porcentaje > 100M || porcentaje < 0M) {
+                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                lblMontoSiniestro.Text = "$ 0.00";
+                model.PorcentajePagoSiniestro = 0M;
+                textBox.Clear();
+            } else {
+                model.PorcentajePagoSiniestro = porcentaje;
+                var monto = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
+                lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
+            }
+        }
+
+        /// <summary>
+        /// Activa y desactiva el ComboBox para la Garantía de Pago y asigna el valor correspondiente
+        /// al VistaModelo del formulario.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No es utilizado.</param>
+        private void rdbContratoSeguro_CheckedChanged(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+
+            if (radio.Checked) {
+                model.GarantiaPago = null;
+                cmbGarantiaPago.Enabled = false;
+            } else {
+                model.GarantiaPago = cmbGarantiaPago.SelectedValue as DiasGarantiaPago?;
+                cmbGarantiaPago.Enabled = true;
+            }
         }
 
         /// <summary>

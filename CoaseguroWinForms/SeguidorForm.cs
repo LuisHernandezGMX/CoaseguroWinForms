@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Sistran.Data;
 using CoaseguroWinForms.DAL.Entities;
@@ -137,10 +136,9 @@ namespace CoaseguroWinForms
 
         private void txtLimiteMaxResponsabilidad_KeyUp(object sender, KeyEventArgs e)
         {
+            decimal monto;
             var textBox = sender as TextBox;
-            var monto = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
+            decimal.TryParse(textBox.Text, out monto);
 
             if (monto < 0M) {
                 MessageBox.Show(this, "El monto debe ser mayor a $ 0.00", "Monto Fuera de Límite",
@@ -178,10 +176,10 @@ namespace CoaseguroWinForms
 
         private void txtParticipacionGMX_KeyUp(object sender, KeyEventArgs e)
         {
+            decimal porcentaje;
             var textBox = sender as TextBox;
-            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
+            decimal.TryParse(textBox.Text, out porcentaje);
+
 
             if (porcentaje < 0M || porcentaje > 100M) {
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
@@ -223,10 +221,9 @@ namespace CoaseguroWinForms
 
         private void txtPorcentajeFeeGMX_KeyUp(object sender, KeyEventArgs e)
         {
+            decimal porcentaje;
             var textBox = sender as TextBox;
-            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
+            decimal.TryParse(textBox.Text, out porcentaje);
 
             if (porcentaje < 0M || porcentaje > 100M) {
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
@@ -310,10 +307,9 @@ namespace CoaseguroWinForms
 
         private void txtPorcentajeSiniestro_KeyUp(object sender, KeyEventArgs e)
         {
+            decimal porcentaje;
             var textBox = sender as TextBox;
-            var porcentaje = string.IsNullOrWhiteSpace(textBox.Text)
-                ? 0M
-                : decimal.Parse(textBox.Text);
+            decimal.TryParse(textBox.Text, out porcentaje);
 
             if (porcentaje < 0M || porcentaje > 100M) {
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
