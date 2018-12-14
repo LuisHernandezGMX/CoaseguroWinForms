@@ -48,6 +48,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sistran.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b9e3c58e7cd6680b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Sistran.Data.dll</HintPath>
@@ -71,6 +79,7 @@
     <Compile Include="Business\Observers\ISujeto.cs" />
     <Compile Include="Business\Observers\LimiteMaximoResponsabilidadSubject.cs" />
     <Compile Include="Business\Observers\SiniestroObserver.cs" />
+    <Compile Include="DAL\Entities\CoaseguroContext.cs" />
     <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
     <Compile Include="DAL\Entities\Enums.cs" />
@@ -104,6 +113,7 @@
     <EmbeddedResource Include="SeguidorForm.resx">
       <DependentUpon>SeguidorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,7 +125,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
