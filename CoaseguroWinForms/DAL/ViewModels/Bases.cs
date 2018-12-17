@@ -47,11 +47,11 @@ namespace CoaseguroWinForms.DAL.ViewModels
         public decimal? PorcentajePagoSiniestro { get; set; }
 
         /// <summary>
-        /// Garantía de pago del siniestro. Si la garantía se hace de acuerdo
-        /// a la Ley sobre el Contrato de Seguro este campo deberá ser NULO. De
-        /// lo contrario, contiene el valor correspondiente de la enumeración, la
-        /// cual equivale a los días que se tienen para realizar el pago del siniestro.
+        /// Garantía de pago del siniestro. Contiene el valor correspondiente
+        /// de la enumeración, la cual equivale a los días que se tienen para
+        /// realizar el pago del siniestro. Si se elige la opción de Ley sobre
+        /// el Contrato de Seguro, la garantía de pago deberán de ser 30 días.
         /// </summary>
-        public DiasGarantiaPago? GarantiaPago { get; set; }
+        public DiasGarantiaPago GarantiaPago { get; set; }
     }
 }

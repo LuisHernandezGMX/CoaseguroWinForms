@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CoaseguroWinForms.DAL.Entities
 {
@@ -27,17 +22,42 @@ namespace CoaseguroWinForms.DAL.Entities
 
     /// <summary>
     /// Los días que se tienen disponibles para realizar el
-    /// pago del siniestro.
+    /// pago del siniestro. La primera opción (30 días) son
+    /// los que exige la Ley sobre el Contrato de Seguro.
+    /// TODO: Se inicia la enumeración en 1 por si estos
+    /// valores se convierten posteriormente a una tabla
+    /// individual en la base de datos.
     /// </summary>
     public enum DiasGarantiaPago
     {
+        /// <summary>
+        /// Los 30 días estándar de acuerdo a la Ley sobre el Contrato de Seguro.
+        /// </summary>
         [Display(Name = "30 días")]
-        TreintaDias,
+        TreintaDias = 1,
 
+        /// <summary>
+        /// Garantía de pago extendida a 45 días.
+        /// </summary>
         [Display(Name = "45 días")]
         CuarentaycincoDias,
 
+        /// <summary>
+        /// Garantía de pago extendida a 60 días.
+        /// </summary>
         [Display(Name = "60 días")]
-        SesentaDias
+        SesentaDias,
+
+        /// <summary>
+        /// Garantía de pago extendida a 90 días.
+        /// </summary>
+        [Display(Name = "90 días")]
+        NoventaDias,
+
+        /// <summary>
+        /// Garantía de pago extendida a 120 días.
+        /// </summary>
+        [Display(Name = "120 días")]
+        CientoyveinteDías
     }
 }

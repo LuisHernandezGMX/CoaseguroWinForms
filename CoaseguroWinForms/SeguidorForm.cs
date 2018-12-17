@@ -74,7 +74,8 @@ namespace CoaseguroWinForms
             cmbGarantiaPago.ValueMember = "ValorEnum";
             cmbGarantiaPago.DataSource = Enum
                 .GetValues(typeof(DiasGarantiaPago))
-                .Cast<Enum>()
+                .Cast<DiasGarantiaPago>()
+                .Where(valor => valor != DiasGarantiaPago.TreintaDias)
                 .Select(valor => new {
                     (Attribute.GetCustomAttribute(valor.GetType().GetField(valor.ToString()), typeof(DisplayAttribute)) as DisplayAttribute).Name,
                     ValorEnum = valor
@@ -94,7 +95,7 @@ namespace CoaseguroWinForms
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
                 PorcentajePagoSiniestro = null,
-                GarantiaPago = null
+                GarantiaPago = DiasGarantiaPago.TreintaDias
             };
 
             lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
@@ -336,10 +337,10 @@ namespace CoaseguroWinForms
             var radio = sender as RadioButton;
 
             if (radio.Checked) {
-                model.GarantiaPago = null;
+                model.GarantiaPago = DiasGarantiaPago.TreintaDias;
                 cmbGarantiaPago.Enabled = false;
             } else {
-                model.GarantiaPago = cmbGarantiaPago.SelectedValue as DiasGarantiaPago?;
+                model.GarantiaPago = (DiasGarantiaPago)cmbGarantiaPago.SelectedValue;
                 cmbGarantiaPago.Enabled = true;
             }
         }
@@ -353,7 +354,7 @@ namespace CoaseguroWinForms
         private void cmbGarantiaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             var combo = sender as ComboBox;
-            model.GarantiaPago = combo.SelectedValue as DiasGarantiaPago?;
+            model.GarantiaPago = (DiasGarantiaPago)combo.SelectedValue;
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
