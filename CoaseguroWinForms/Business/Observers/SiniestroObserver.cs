@@ -48,7 +48,7 @@ namespace CoaseguroWinForms.Business.Observers
         /// <param name="lblMontoSiniestro">La etiqueta que muestra el monto de siniestro a pagar.</param>
         public SiniestroObserver(SeguidorViewModel modelo, Label lblMontoSiniestro)
         {
-            id = new Guid();
+            id = Guid.NewGuid();
             this.modelo = modelo;
             this.lblMontoSiniestro = lblMontoSiniestro;
         }

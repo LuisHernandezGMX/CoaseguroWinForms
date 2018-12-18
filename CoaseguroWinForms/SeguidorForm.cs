@@ -39,6 +39,11 @@ namespace CoaseguroWinForms
         /// </summary>
         private GMXSubjectObserver gmxSubObs;
 
+        /// <summary>
+        /// Sujeto-Observador del monto de participación de la coaseguradora líder.
+        /// </summary>
+        private LiderMontoParticipacionSubjectObserver liderMontoSubObs;
+
         #endregion
 
         /// <summary>
@@ -95,10 +100,26 @@ namespace CoaseguroWinForms
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
                 PorcentajePagoSiniestro = null,
-                GarantiaPago = DiasGarantiaPago.TreintaDias
+                GarantiaPago = DiasGarantiaPago.TreintaDias,
+                Lider = new CoaseguradoraLiderViewModel {
+                    Nombre = "SEGUROS BANORTE GENERALI, S.A. DE C.V., GRUPO FINANCIERO BANORTE",
+                    PorcentajeParticipacion = 80,
+                    MontoParticipacion = 0
+                }
             };
 
+            model.Lider.MontoPrimaNeta = decimal.Round(model.PrimaNeta * model.Lider.PorcentajeParticipacion / 100M, 2);
+            string primaNetaLider = $"$ {model.Lider.MontoPrimaNeta.ToString("N2")}";
+            string porcentajeLider = $"{model.Lider.PorcentajeParticipacion.ToString("N2")} %";
+
             lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
+
+            lblCoaseguradoraLider.Text = model.Lider.Nombre;
+            lblMontoPrimaNetaCoaseguradoraLider.Text = primaNetaLider;
+            lblParticipacionCoaseguradoraLider.Text = porcentajeLider;
+
+            lblPrimaNetaTotalParticipacion.Text = primaNetaLider;
+            lblPorcentajeTotalParticipacion.Text = porcentajeLider;
         }
 
         /// <summary>
@@ -108,9 +129,14 @@ namespace CoaseguroWinForms
         {
             sujetoLimiteMax = new LimiteMaximoResponsabilidadSubject();
             gmxSubObs = new GMXSubjectObserver(model, lblMontoGMX);
+            liderMontoSubObs = new LiderMontoParticipacionSubjectObserver(model, lblMontoCoaseguradoraLider);
+            var totalMontoSubObs = new TotalMontoParticipacionObserver(model, lblMontoTotalParticipacion, lblPorcentajeTotalParticipacion);
 
             sujetoLimiteMax.RegistrarObservador(gmxSubObs);
+            sujetoLimiteMax.RegistrarObservador(liderMontoSubObs);
             gmxSubObs.RegistrarObservador(new SiniestroObserver(model, lblMontoSiniestro));
+            gmxSubObs.RegistrarObservador(totalMontoSubObs);
+            liderMontoSubObs.RegistrarObservador(totalMontoSubObs);
         }
 
         /// <summary>
@@ -186,16 +212,28 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                model.MontoGMX = model.PorcentajeGMX = 0M;
-                lblMontoGMX.Text = "$ 0.00";
+                model.MontoGMX = model.PorcentajeGMX = model.MontoPrimaNetaGMX = 0M;
+                lblMontoGMX.Text = lblMontoPrimaNetaGMX.Text = "$ 0.00";
+                textBox.Clear();
+            } else if (porcentaje + model.Lider.PorcentajeParticipacion > 100M) {
+                MessageBox.Show(this, "El porcentaje de participación total excede el 100%", "Porcentaje Fuera de Límite",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                model.MontoGMX = model.PorcentajeGMX = model.MontoPrimaNetaGMX = 0M;
+                lblMontoGMX.Text = lblMontoPrimaNetaGMX.Text = "$ 0.00";
                 textBox.Clear();
             } else {
                 model.PorcentajeGMX = porcentaje;
+                model.MontoPrimaNetaGMX = decimal.Round(porcentaje * model.PrimaNeta / 100M, 2);
                 model.MontoGMX = decimal.Round(porcentaje * model.LimiteMaxResponsabilidad / 100M, 2);
+
                 lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
+                lblMontoPrimaNetaGMX.Text = $"$ {model.MontoPrimaNetaGMX.ToString("N2")}";
             }
 
             gmxSubObs.Notificar(model.MontoGMX);
+            model.MontoPrimaNetaTotalParticipacion = model.MontoPrimaNetaGMX + model.Lider.MontoPrimaNeta;
+            lblPrimaNetaTotalParticipacion.Text = $"$ {model.MontoPrimaNetaTotalParticipacion.ToString("N2")}";
         }
 
         /// <summary>

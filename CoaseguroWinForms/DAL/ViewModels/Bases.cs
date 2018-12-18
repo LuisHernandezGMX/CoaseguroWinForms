@@ -29,6 +29,30 @@ namespace CoaseguroWinForms.DAL.ViewModels
         public decimal MontoGMX { get; set; }
 
         /// <summary>
+        /// El monto de participación de la prima neta de GMX. Este
+        /// valor se calcula a partir del PrimaNeta y de PorcentajeGMX.
+        /// </summary>
+        public decimal MontoPrimaNetaGMX { get; set; }
+
+        /// <summary>
+        /// Porcentaje total de la participación de las coaseguradoras,
+        /// incluyendo a GMX.
+        /// </summary>
+        public decimal PorcentajeTotalParticipacion { get; set; }
+
+        /// <summary>
+        /// Monto total de la participación de todas las coaseguradoras,
+        /// incluyendo a GMX.
+        /// </summary>
+        public decimal MontoTotalParticipacion { get; set; }
+
+        /// <summary>
+        /// Monto total de la prima neta de todas las coaseguradoras, incluyendo
+        /// a GMX.
+        /// </summary>
+        public decimal MontoPrimaNetaTotalParticipacion { get; set; }
+
+        /// <summary>
         /// El método de pago.
         /// </summary>
         public MetodoPago MetodoPago { get; set; }

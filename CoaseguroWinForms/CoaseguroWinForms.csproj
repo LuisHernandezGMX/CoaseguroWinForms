@@ -77,8 +77,10 @@
     <Compile Include="Business\Observers\GMXSubjectObserver.cs" />
     <Compile Include="Business\Observers\IObservador.cs" />
     <Compile Include="Business\Observers\ISujeto.cs" />
+    <Compile Include="Business\Observers\LiderMontoParticipacionSubjectObserver.cs" />
     <Compile Include="Business\Observers\LimiteMaximoResponsabilidadSubject.cs" />
     <Compile Include="Business\Observers\SiniestroObserver.cs" />
+    <Compile Include="Business\Observers\TotalMontoParticipacionObserver.cs" />
     <Compile Include="DAL\Entities\CoaseguroContext.cs" />
     <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />

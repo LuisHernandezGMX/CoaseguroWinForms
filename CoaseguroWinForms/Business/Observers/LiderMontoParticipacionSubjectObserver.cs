@@ -7,14 +7,15 @@ using CoaseguroWinForms.DAL.ViewModels.Seguidor;
 namespace CoaseguroWinForms.Business.Observers
 {
     /// <summary>
-    /// Sujeto-Observador que representa a la participación de GMX
-    /// como coaseguradora seguidora. Actualiza su propio estado cada
-    /// vez que hay un cambio en el límite máximo de responsabilidad al
-    /// 100 % (observador de <see cref="LimiteMaximoResponsabilidadSubject"/>).
+    /// Sujeto-Observador que representa el monto
+    /// de participación de la coaseguradora líder.
+    /// Actualiza su propio estado cada vez que hay
+    /// un cambio en el límite máximo de responsabilidad
+    /// al 100% (<see cref="LimiteMaximoResponsabilidadSubject"/>).
     /// Y una vez que ocurre este cambio, notifica a todos sus respectivos
-    /// observadores con la nueva participación de GMX.
+    /// observadores con la nueva participación del líder.
     /// </summary>
-    class GMXSubjectObserver : ISujeto<decimal>, IObservador<decimal>
+    public class LiderMontoParticipacionSubjectObserver : ISujeto<decimal>, IObservador<decimal>
     {
         #region Variables Privadas
 
@@ -24,9 +25,9 @@ namespace CoaseguroWinForms.Business.Observers
         private SeguidorViewModel modelo;
 
         /// <summary>
-        /// Etiqueta del formulario que muestra el monto de participación de GMX.
+        /// Etiqueta del formulario que muestra el monto de participación de la coaseguradora Líder.
         /// </summary>
-        private Label lblMontoGMX;
+        private Label lblMontoCoaseguradoraLider;
 
         /// <summary>
         /// Id único de este observador;
@@ -34,7 +35,7 @@ namespace CoaseguroWinForms.Business.Observers
         private Guid id;
 
         /// <summary>
-        /// l conjunto de observadores enlazados a este sujeto.
+        /// El conjunto de observadores enlazados a este sujeto.
         /// </summary>
         private List<IObservador<decimal>> observadores;
 
@@ -53,13 +54,13 @@ namespace CoaseguroWinForms.Business.Observers
         /// Crea un nuevo sujeto-observador enlazado al vista modelo indicado.
         /// </summary>
         /// <param name="modelo">El vista modelo del formulario.</param>
-        /// <param name="lblMontoGMX">La etiqueta que muestra el monto de participación de GMX.</param>
-        public GMXSubjectObserver(SeguidorViewModel modelo, Label lblMontoGMX)
+        /// <param name="lblMontoCoaseguradoraLider">Etiqueta del formulario que muestra el monto de participación de la coaseguradora Líder.</param>
+        public LiderMontoParticipacionSubjectObserver(SeguidorViewModel modelo, Label lblMontoCoaseguradoraLider)
         {
             id = Guid.NewGuid();
             this.modelo = modelo;
-            this.lblMontoGMX = lblMontoGMX;
             observadores = new List<IObservador<decimal>>();
+            this.lblMontoCoaseguradoraLider = lblMontoCoaseguradoraLider;
         }
 
         /// <summary>
@@ -100,10 +101,10 @@ namespace CoaseguroWinForms.Business.Observers
         /// <param name="nuevoEstado">El nuevo estado del sujeto que ha sido propagado a este observador.</param>
         public void ActualizarEstado(decimal nuevoEstado)
         {
-            modelo.MontoGMX = decimal.Round(nuevoEstado * modelo.PorcentajeGMX / 100M, 2);
-            lblMontoGMX.Text = $"$ {modelo.MontoGMX.ToString("N2")}";
+            modelo.Lider.MontoParticipacion = decimal.Round(nuevoEstado * modelo.Lider.PorcentajeParticipacion / 100M, 2);
+            lblMontoCoaseguradoraLider.Text = $"$ {modelo.Lider.MontoParticipacion.ToString("N2")}";
 
-            Notificar(modelo.MontoGMX);
+            Notificar(modelo.Lider.MontoParticipacion);
         }
     }
 }
