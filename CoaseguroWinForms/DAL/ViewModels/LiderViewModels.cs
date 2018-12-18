@@ -43,6 +43,12 @@ namespace CoaseguroWinForms.DAL.ViewModels.Lider
         public decimal MontoParticipacion { get; set; }
 
         /// <summary>
+        /// El monto de prima neta de la coaseguradora de acuerdo
+        /// a su porcentaje de participación.
+        /// </summary>
+        public decimal MontoPrimaNeta { get; set; }
+
+        /// <summary>
         /// El porcentaje de Fee de la coaseguradora.
         /// Este valor es ingresado por el usuario.
         /// </summary>

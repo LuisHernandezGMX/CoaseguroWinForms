@@ -95,48 +95,58 @@ namespace CoaseguroWinForms
                 PorcentajePagoSiniestro = null,
                 GarantiaPago = DiasGarantiaPago.TreintaDias
             };
-            
+
             model.Coaseguradoras = new List<CoaseguradoraViewModel> {
                 new CoaseguradoraViewModel {
                     Id = 1,
                     Nombre = "CHUBB DE MÉXICO, COMPAÑÍA DE SEGUROS",
-                    PorcentajeParticipacion = 10,
-                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 10 / 100, 2)
+                    PorcentajeParticipacion = 10M,
+                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 10M / 100M, 2),
+                    MontoPrimaNeta = decimal.Round(model.PrimaNeta * 10M / 100M, 2)
                 },
                 new CoaseguradoraViewModel {
                     Id = 2,
                     Nombre = "EL ÁGUILA COMPAÑÍA DE SEGUROS, S.A.",
-                    PorcentajeParticipacion = 5,
-                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 5 / 100, 2)
+                    PorcentajeParticipacion = 5M,
+                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 5M / 100, 2),
+                    MontoPrimaNeta = decimal.Round(model.PrimaNeta * 5M / 100M, 2)
                 },
                 new CoaseguradoraViewModel {
                     Id = 3,
                     Nombre = "ACE SEGUROS, S.A.",
-                    PorcentajeParticipacion = 5,
-                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 5 / 100, 2)
+                    PorcentajeParticipacion = 5M,
+                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 5M / 100M, 2),
+                    MontoPrimaNeta = decimal.Round(model.PrimaNeta * 5M / 100M, 2)
                 },
                 new CoaseguradoraViewModel {
                     Id = 4,
                     Nombre = "GENERAL DE SEGUROS, S.A.B.",
-                    PorcentajeParticipacion = 10,
-                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 10 / 100, 2)
+                    PorcentajeParticipacion = 10M,
+                    MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * 10M / 100M, 2),
+                    MontoPrimaNeta = decimal.Round(model.PrimaNeta * 10M / 100M, 2)
                 }
             };
 
             // Características del Coaseguro
             lblLimiteMaximoResponsabilidad.Text = $"$ {model.LimiteMaxResponsabilidad.ToString("N2")}";
             lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
-            lblPorcentajeGMX.Text = $"{model.PorcentajeGMX.ToString("N2")}%";
+            lblPorcentajeGMX.Text = $"{model.PorcentajeGMX.ToString("N2")} %";
 
             // Participación de GMX
-            model.MontoGMX = decimal.Round(model.LimiteMaxResponsabilidad * model.PorcentajeGMX / 100, 2);
+            model.MontoGMX = decimal.Round(model.LimiteMaxResponsabilidad * model.PorcentajeGMX / 100M, 2);
+            model.MontoPrimaNetaGMX = decimal.Round(model.PrimaNeta * model.PorcentajeGMX / 100M, 2);
             lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
+            lblMontoPrimaNetaGMX.Text = $"$ {model.MontoPrimaNetaGMX.ToString("N2")}";
 
             model.Coaseguradoras.ForEach(coas => {
                 // Grid Coaseguradoras
                 gridCoaseguradoras
                     .Rows
-                    .Add(coas.Nombre, $"{coas.PorcentajeParticipacion.ToString("N2")}%", $"$ {coas.MontoParticipacion.ToString("N2")}");
+                    .Add(
+                        coas.Nombre,
+                        $"{coas.PorcentajeParticipacion.ToString("N2")} %",
+                        $"$ {coas.MontoParticipacion.ToString("N2")}",
+                        $"$ {coas.MontoPrimaNeta.ToString("N2")}");
 
                 // Grid Fee
                 gridFee
@@ -162,8 +172,18 @@ namespace CoaseguroWinForms
                 .Select(coas => coas.MontoParticipacion)
                 .Sum();
 
-            lblPorcentajeCoaseguradoras.Text = $"{totalPorcentaje.ToString("N2")}%";
-            lblMontoCoaseguradoras.Text = $"$ {totalMonto.ToString("N2")}";
+            var totalPrimaNeta = model
+                .Coaseguradoras
+                .Select(coas => coas.MontoPrimaNeta)
+                .Sum();
+
+            model.PorcentajeTotalParticipacion = totalPorcentaje + model.PorcentajeGMX;
+            model.MontoTotalParticipacion = totalMonto + model.MontoGMX;
+            model.MontoPrimaNetaTotalParticipacion = totalPrimaNeta + model.MontoPrimaNetaGMX;
+
+            lblMontoCoaseguradoras.Text = $"$ {model.MontoTotalParticipacion.ToString("N2")}";
+            lblPorcentajeCoaseguradoras.Text = $" {model.PorcentajeTotalParticipacion.ToString("N2")} %";
+            lblPrimaNetaTotalParticipacion.Text = $"$ {model.MontoPrimaNetaTotalParticipacion.ToString("N2")}";
         }
 
         /// <summary>
