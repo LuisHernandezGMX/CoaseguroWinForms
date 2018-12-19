@@ -66,8 +66,8 @@ namespace CoaseguroWinForms.Business.Observers
         /// <param name="nuevoEstado">El nuevo estado del sujeto que ha sido propagado a este observador.</param>
         public void ActualizarEstado(decimal nuevoEstado)
         {
-            modelo.PorcentajeTotalParticipacion = modelo.PorcentajeGMX + modelo.Lider.PorcentajeParticipacion;
-            modelo.MontoTotalParticipacion = modelo.MontoGMX + modelo.Lider.MontoParticipacion;
+            modelo.PorcentajeTotalParticipacion = modelo.GMX.Porcentaje + modelo.Lider.PorcentajeParticipacion;
+            modelo.MontoTotalParticipacion = modelo.GMX.MontoParticipacion + modelo.Lider.MontoParticipacion;
             lblMontoTotalParticipacion.Text = $"$ {modelo.MontoTotalParticipacion.ToString("N2")}";
             lblPorcentajeTotalParticipacion.Text = $"{modelo.PorcentajeTotalParticipacion.ToString("N2")} %";
         }

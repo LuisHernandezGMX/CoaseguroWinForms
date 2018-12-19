@@ -100,10 +100,10 @@ namespace CoaseguroWinForms.Business.Observers
         /// <param name="nuevoEstado">El nuevo estado del sujeto que ha sido propagado a este observador.</param>
         public void ActualizarEstado(decimal nuevoEstado)
         {
-            modelo.MontoGMX = decimal.Round(nuevoEstado * modelo.PorcentajeGMX / 100M, 2);
-            lblMontoGMX.Text = $"$ {modelo.MontoGMX.ToString("N2")}";
+            modelo.GMX.MontoParticipacion = decimal.Round(nuevoEstado * modelo.GMX.Porcentaje / 100M, 2);
+            lblMontoGMX.Text = $"$ {modelo.GMX.MontoParticipacion.ToString("N2")}";
 
-            Notificar(modelo.MontoGMX);
+            Notificar(modelo.GMX.MontoParticipacion);
         }
     }
 }

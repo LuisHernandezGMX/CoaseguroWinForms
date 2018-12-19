@@ -18,21 +18,9 @@ namespace CoaseguroWinForms.DAL.ViewModels
         public decimal PrimaNeta { get; set; }
 
         /// <summary>
-        /// El porcentaje de participación de GMX.
+        /// Los montos propios de GMX en el formulario.
         /// </summary>
-        public decimal PorcentajeGMX { get; set; }
-
-        /// <summary>
-        /// El monto de participación de GMX. Este valor se
-        /// calcula a partir de PorcentajeGMX.
-        /// </summary>
-        public decimal MontoGMX { get; set; }
-
-        /// <summary>
-        /// El monto de participación de la prima neta de GMX. Este
-        /// valor se calcula a partir del PrimaNeta y de PorcentajeGMX.
-        /// </summary>
-        public decimal MontoPrimaNetaGMX { get; set; }
+        public GMXViewModel GMX { get; set; }
 
         /// <summary>
         /// Porcentaje total de la participación de las coaseguradoras,
@@ -77,5 +65,28 @@ namespace CoaseguroWinForms.DAL.ViewModels
         /// el Contrato de Seguro, la garantía de pago deberán de ser 30 días.
         /// </summary>
         public DiasGarantiaPago GarantiaPago { get; set; }
+    }
+
+    /// <summary>
+    /// Los montos propios de GMX en el formulario.
+    /// </summary>
+    public class GMXViewModel
+    {
+        /// <summary>
+        /// El porcentaje de participación de GMX.
+        /// </summary>
+        public decimal Porcentaje { get; set; }
+
+        /// <summary>
+        /// El monto de participación de GMX. Este valor se
+        /// calcula a partir de PorcentajeGMX.
+        /// </summary>
+        public decimal MontoParticipacion { get; set; }
+
+        /// <summary>
+        /// El monto de participación de la prima neta de GMX. Este
+        /// valor se calcula a partir del PrimaNeta y de PorcentajeGMX.
+        /// </summary>
+        public decimal MontoPrimaNeta { get; set; }
     }
 }

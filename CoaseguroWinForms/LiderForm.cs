@@ -89,7 +89,9 @@ namespace CoaseguroWinForms
             model = new LiderViewModel {
                 LimiteMaxResponsabilidad = 1000000,
                 PrimaNeta = 200000,
-                PorcentajeGMX = 70,
+                GMX = new DAL.ViewModels.GMXViewModel {
+                    Porcentaje = 70
+                },
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
                 PorcentajePagoSiniestro = null,
@@ -130,13 +132,13 @@ namespace CoaseguroWinForms
             // Características del Coaseguro
             lblLimiteMaximoResponsabilidad.Text = $"$ {model.LimiteMaxResponsabilidad.ToString("N2")}";
             lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
-            lblPorcentajeGMX.Text = $"{model.PorcentajeGMX.ToString("N2")} %";
+            lblPorcentajeGMX.Text = $"{model.GMX.Porcentaje.ToString("N2")} %";
 
             // Participación de GMX
-            model.MontoGMX = decimal.Round(model.LimiteMaxResponsabilidad * model.PorcentajeGMX / 100M, 2);
-            model.MontoPrimaNetaGMX = decimal.Round(model.PrimaNeta * model.PorcentajeGMX / 100M, 2);
-            lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
-            lblMontoPrimaNetaGMX.Text = $"$ {model.MontoPrimaNetaGMX.ToString("N2")}";
+            model.GMX.MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * model.GMX.Porcentaje / 100M, 2);
+            model.GMX.MontoPrimaNeta = decimal.Round(model.PrimaNeta * model.GMX.Porcentaje / 100M, 2);
+            lblMontoGMX.Text = $"$ {model.GMX.MontoParticipacion.ToString("N2")}";
+            lblMontoPrimaNetaGMX.Text = $"$ {model.GMX.MontoPrimaNeta.ToString("N2")}";
 
             model.Coaseguradoras.ForEach(coas => {
                 // Grid Coaseguradoras
@@ -177,9 +179,9 @@ namespace CoaseguroWinForms
                 .Select(coas => coas.MontoPrimaNeta)
                 .Sum();
 
-            model.PorcentajeTotalParticipacion = totalPorcentaje + model.PorcentajeGMX;
-            model.MontoTotalParticipacion = totalMonto + model.MontoGMX;
-            model.MontoPrimaNetaTotalParticipacion = totalPrimaNeta + model.MontoPrimaNetaGMX;
+            model.PorcentajeTotalParticipacion = totalPorcentaje + model.GMX.Porcentaje;
+            model.MontoTotalParticipacion = totalMonto + model.GMX.MontoParticipacion;
+            model.MontoPrimaNetaTotalParticipacion = totalPrimaNeta + model.GMX.MontoPrimaNeta;
 
             lblMontoCoaseguradoras.Text = $"$ {model.MontoTotalParticipacion.ToString("N2")}";
             lblPorcentajeCoaseguradoras.Text = $" {model.PorcentajeTotalParticipacion.ToString("N2")} %";

@@ -438,6 +438,7 @@
             this.label11.Size = new System.Drawing.Size(123, 13);
             this.label11.TabIndex = 4;
             this.label11.Text = "% Participación";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox5
             // 

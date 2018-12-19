@@ -97,6 +97,7 @@ namespace CoaseguroWinForms
             // ViewModel de Prueba (el real se llena con los datos de la base de datos.)
             model = new SeguidorViewModel {
                 PrimaNeta = 200000,
+                GMX = new DAL.ViewModels.GMXViewModel(),
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
                 PorcentajePagoSiniestro = null,
@@ -212,27 +213,27 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                model.MontoGMX = model.PorcentajeGMX = model.MontoPrimaNetaGMX = 0M;
+                model.GMX.MontoParticipacion = model.GMX.Porcentaje = model.GMX.MontoPrimaNeta = 0M;
                 lblMontoGMX.Text = lblMontoPrimaNetaGMX.Text = "$ 0.00";
                 textBox.Clear();
             } else if (porcentaje + model.Lider.PorcentajeParticipacion > 100M) {
                 MessageBox.Show(this, "El porcentaje de participación total excede el 100%", "Porcentaje Fuera de Límite",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                model.MontoGMX = model.PorcentajeGMX = model.MontoPrimaNetaGMX = 0M;
+                model.GMX.MontoParticipacion = model.GMX.Porcentaje = model.GMX.MontoPrimaNeta = 0M;
                 lblMontoGMX.Text = lblMontoPrimaNetaGMX.Text = "$ 0.00";
                 textBox.Clear();
             } else {
-                model.PorcentajeGMX = porcentaje;
-                model.MontoPrimaNetaGMX = decimal.Round(porcentaje * model.PrimaNeta / 100M, 2);
-                model.MontoGMX = decimal.Round(porcentaje * model.LimiteMaxResponsabilidad / 100M, 2);
+                model.GMX.Porcentaje = porcentaje;
+                model.GMX.MontoPrimaNeta = decimal.Round(porcentaje * model.PrimaNeta / 100M, 2);
+                model.GMX.MontoParticipacion = decimal.Round(porcentaje * model.LimiteMaxResponsabilidad / 100M, 2);
 
-                lblMontoGMX.Text = $"$ {model.MontoGMX.ToString("N2")}";
-                lblMontoPrimaNetaGMX.Text = $"$ {model.MontoPrimaNetaGMX.ToString("N2")}";
+                lblMontoGMX.Text = $"$ {model.GMX.MontoParticipacion.ToString("N2")}";
+                lblMontoPrimaNetaGMX.Text = $"$ {model.GMX.MontoPrimaNeta.ToString("N2")}";
             }
 
-            gmxSubObs.Notificar(model.MontoGMX);
-            model.MontoPrimaNetaTotalParticipacion = model.MontoPrimaNetaGMX + model.Lider.MontoPrimaNeta;
+            gmxSubObs.Notificar(model.GMX.MontoParticipacion);
+            model.MontoPrimaNetaTotalParticipacion = model.GMX.MontoPrimaNeta + model.Lider.MontoPrimaNeta;
             lblPrimaNetaTotalParticipacion.Text = $"$ {model.MontoPrimaNetaTotalParticipacion.ToString("N2")}";
         }
 
@@ -359,7 +360,7 @@ namespace CoaseguroWinForms
                 textBox.Clear();
             } else {
                 model.PorcentajePagoSiniestro = porcentaje;
-                var monto = decimal.Round(porcentaje * model.MontoGMX / 100M, 2);
+                var monto = decimal.Round(porcentaje * model.GMX.MontoParticipacion / 100M, 2);
                 lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
             }
         }
