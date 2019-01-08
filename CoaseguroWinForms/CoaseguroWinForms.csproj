@@ -63,6 +63,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,10 +83,21 @@
     <Compile Include="Business\Observers\LimiteMaximoResponsabilidadSubject.cs" />
     <Compile Include="Business\Observers\SiniestroObserver.cs" />
     <Compile Include="Business\Observers\TotalMontoParticipacionObserver.cs" />
+    <Compile Include="DAL\DAO\LiderDao.cs" />
+    <Compile Include="DAL\Entities\mcia.cs" />
+    <Compile Include="DAL\Entities\pv_coas_cia.cs" />
+    <Compile Include="DAL\Entities\pv_coas_cia_wkf.cs" />
+    <Compile Include="DAL\Entities\pv_header.cs" />
+    <Compile Include="DAL\Entities\pv_header_wkf.cs" />
+    <Compile Include="DAL\Entities\pv_importe.cs" />
+    <Compile Include="DAL\Entities\pv_importe_coas.cs" />
+    <Compile Include="DAL\Entities\pv_importe_coas_wkf.cs" />
+    <Compile Include="DAL\Entities\pv_importe_wkf.cs" />
+    <Compile Include="DAL\Entities\tmoneda.cs" />
     <Compile Include="DAL\Entities\CoaseguroContext.cs" />
     <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
-    <Compile Include="DAL\Entities\Enums.cs" />
+    <Compile Include="DAL\Enums.cs" />
     <Compile Include="DAL\ViewModels\SeguidorViewModels.cs" />
     <Compile Include="LiderForm.cs">
       <SubType>Form</SubType>
@@ -131,7 +144,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
@@ -146,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\Sistran.Data.dll" />
+    <Content Include="SQL\ConsultasLider.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,4 @@
-﻿using CoaseguroWinForms.DAL.Entities;
-
-namespace CoaseguroWinForms.DAL.ViewModels
+﻿namespace CoaseguroWinForms.DAL.ViewModels
 {
     /// <summary>
     /// Vista modelo base para almacenar el estado que se maneja en los formularios.
@@ -16,6 +14,11 @@ namespace CoaseguroWinForms.DAL.ViewModels
         /// La prima neta.
         /// </summary>
         public decimal PrimaNeta { get; set; }
+
+        /// <summary>
+        /// El tipo de moneda a manejar en este formulario.
+        /// </summary>
+        public TipoMonedaViewModel Moneda { get; set; }
 
         /// <summary>
         /// Los montos propios de GMX en el formulario.
@@ -88,5 +91,28 @@ namespace CoaseguroWinForms.DAL.ViewModels
         /// valor se calcula a partir del PrimaNeta y de PorcentajeGMX.
         /// </summary>
         public decimal MontoPrimaNeta { get; set; }
+    }
+
+    /// <summary>
+    /// Representa el tipo de moneda a manejar para este coaseguro. Está
+    /// definido por la tabla [tmoneda].
+    /// </summary>
+    public class TipoMonedaViewModel
+    {
+        /// <summary>
+        /// El Id de esta moneda.
+        /// </summary>
+        public decimal Id { get; set; }
+
+        /// <summary>
+        /// El símbolo a utilizar, por ejemplo, [$]
+        /// para MXN y [US$] para dólar estadounidense.
+        /// </summary>
+        public string Simbolo { get; set; }
+
+        /// <summary>
+        /// La descripción de esta moneda.
+        /// </summary>
+        public string Descripcion { get; set; }
     }
 }

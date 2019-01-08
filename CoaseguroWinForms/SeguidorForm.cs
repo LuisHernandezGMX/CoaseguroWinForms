@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
 using Sistran.Data;
-using CoaseguroWinForms.DAL.Entities;
+using CoaseguroWinForms.DAL;
 using CoaseguroWinForms.DAL.ViewModels.Seguidor;
 
 namespace CoaseguroWinForms
@@ -88,7 +88,7 @@ namespace CoaseguroWinForms
                 GarantiaPago = DiasGarantiaPago.TreintaDias,
                 Lider = new CoaseguradoraLiderViewModel {
                     Nombre = "SEGUROS BANORTE GENERALI, S.A. DE C.V., GRUPO FINANCIERO BANORTE",
-                    PorcentajeParticipacion = 80M,
+                    PorcentajeParticipacion = 60M,
                 }
             };
 

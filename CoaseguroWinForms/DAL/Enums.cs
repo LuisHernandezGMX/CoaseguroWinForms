@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoaseguroWinForms.DAL.Entities
+namespace CoaseguroWinForms.DAL
 {
     /// <summary>
     /// El método de pago en el coaseguro.
