@@ -84,6 +84,9 @@
     <Compile Include="Business\Observers\SiniestroObserver.cs" />
     <Compile Include="Business\Observers\TotalMontoParticipacionObserver.cs" />
     <Compile Include="DAL\DAO\LiderDao.cs" />
+    <Compile Include="DAL\DAO\SeguidorDao.cs" />
+    <Compile Include="DAL\Entities\pv_cia_lider.cs" />
+    <Compile Include="DAL\Entities\pv_cia_lider_wkf.cs" />
     <Compile Include="DAL\Entities\mcia.cs" />
     <Compile Include="DAL\Entities\pv_coas_cia.cs" />
     <Compile Include="DAL\Entities\pv_coas_cia_wkf.cs" />
@@ -159,6 +162,7 @@
   <ItemGroup>
     <Content Include="DLL\Sistran.Data.dll" />
     <Content Include="SQL\ConsultasLider.sql" />
+    <Content Include="SQL\ConsultasSeguidor.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

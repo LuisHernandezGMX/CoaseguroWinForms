@@ -52,7 +52,7 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
                 model.PrimaNeta = limiteYPrimaNeta.PrimaNeta;
                 model.LimiteMaxResponsabilidad = limiteYPrimaNeta.LimiteMaximoResponsabilidad;
 
-                // Montos de Participación y Prima Neta de GMX.
+                // Montos de Participación y Prima de GMX.
                 model.GMX = db
                     .pv_importe
                     .Where(importe => importe.id_pv == idPv && importe.cod_moneda == model.Moneda.Id)
@@ -73,17 +73,18 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
                         MontoPrimaNeta = coas.imp_prima
                     })
                     .ToList();
-
-                foreach (var coas in model.Coaseguradoras) {
-                    coas.MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * coas.PorcentajeParticipacion / 100M, 2);
-                }
-
-                // Porcentaje de GMX
-                model.GMX.Porcentaje = 100M - model
-                    .Coaseguradoras
-                    .Select(coas => coas.PorcentajeParticipacion)
-                    .Sum();
             }
+
+            // Monto de Participación de Aseguradoras
+            foreach (var coas in model.Coaseguradoras) {
+                coas.MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * coas.PorcentajeParticipacion / 100M, 2);
+            }
+
+            // Porcentaje de GMX
+            model.GMX.Porcentaje = 100M - model
+                .Coaseguradoras
+                .Select(coas => coas.PorcentajeParticipacion)
+                .Sum();
 
             return model;
         }

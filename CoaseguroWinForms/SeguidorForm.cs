@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
 using Sistran.Data;
 using CoaseguroWinForms.DAL;
+using CoaseguroWinForms.DAL.DAO.Seguidor;
 using CoaseguroWinForms.DAL.ViewModels.Seguidor;
 
 namespace CoaseguroWinForms
@@ -40,13 +41,13 @@ namespace CoaseguroWinForms
             this.sCommand = sCommand;
             this.idPv = idPv;
 
-            InitializeComponent();
-            InicializarInformacionFormulario();
-            InicializarCmbGarantiaPago();
-
-            // Conexión SII
             var connection = new Conecction();
             connection.GetStringConnection(sCommand);
+            model = SeguidorDao.RellenarModelo(idPv, connection.ConecctionSII);
+
+            InitializeComponent();
+            InicializarCmbGarantiaPago();
+            InicializarInformacionFormulario();
 
             lblNombreUsuario.Text = connection.User;
             lblEntorno.Text = connection.Base;
@@ -77,44 +78,25 @@ namespace CoaseguroWinForms
         /// </summary>
         private void InicializarInformacionFormulario()
         {
-            // ViewModel de Prueba (el real se llena con los datos de la base de datos.)
-            model = new SeguidorViewModel {
-                LimiteMaxResponsabilidad = 1000000,
-                PrimaNeta = 200000,
-                GMX = new DAL.ViewModels.GMXViewModel(),
-                MetodoPago = MetodoPago.EstadoCuenta,
-                PagoComisionAgente = PagoComisionAgente.Lider100,
-                PorcentajePagoSiniestro = null,
-                GarantiaPago = DiasGarantiaPago.TreintaDias,
-                Lider = new CoaseguradoraLiderViewModel {
-                    Nombre = "SEGUROS BANORTE GENERALI, S.A. DE C.V., GRUPO FINANCIERO BANORTE",
-                    PorcentajeParticipacion = 60M,
-                }
-            };
+            // Etiqueta Monto Siniestro
+            lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
 
             // Límite Máximo y Prima Neta
-            lblLimiteMaximoResponsabilidad.Text = $"$ {model.LimiteMaxResponsabilidad.ToString("N2")}";
-            lblPrimaNeta.Text = $"$ {model.PrimaNeta.ToString("N2")}";
+            lblLimiteMaximoResponsabilidad.Text = $"{model.Moneda.Simbolo} {model.LimiteMaxResponsabilidad.ToString("N2")}";
+            lblPrimaNeta.Text = $"{model.Moneda.Simbolo} {model.PrimaNeta.ToString("N2")}";
 
             // GMX
-            model.GMX.Porcentaje = 100M - model.Lider.PorcentajeParticipacion;
-            model.GMX.MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * model.GMX.Porcentaje / 100M, 2);
-            model.GMX.MontoPrimaNeta = decimal.Round(model.PrimaNeta * model.GMX.Porcentaje / 100M, 2);
-
             var porcentajeGMX = $"{model.GMX.Porcentaje.ToString("N2")} %";
-            var montoGMX = $"$ {model.GMX.MontoParticipacion.ToString("N2")}";
-            var primaNetaGMX = $"$ {model.GMX.MontoPrimaNeta.ToString("N2")}";
+            var montoGMX = $"{model.Moneda.Simbolo} {model.GMX.MontoParticipacion.ToString("N2")}";
+            var primaNetaGMX = $"{model.Moneda.Simbolo} {model.GMX.MontoPrimaNeta.ToString("N2")}";
 
             lblMontoGMX.Text = montoGMX;
             lblPorcentajeGMX.Text = porcentajeGMX;
             lblMontoPrimaNetaGMX.Text = primaNetaGMX;
 
             // Coaseguradora Líder
-            model.Lider.MontoPrimaNeta = decimal.Round(model.PrimaNeta * model.Lider.PorcentajeParticipacion / 100M, 2);
-            model.Lider.MontoParticipacion = decimal.Round(model.LimiteMaxResponsabilidad * model.Lider.PorcentajeParticipacion / 100M, 2);
-
-            var montoLider = $"$ {model.Lider.MontoParticipacion.ToString("N2")}";
-            var primaNetaLider = $"$ {model.Lider.MontoPrimaNeta.ToString("N2")}";
+            var montoLider = $"{model.Moneda.Simbolo} {model.Lider.MontoParticipacion.ToString("N2")}";
+            var primaNetaLider = $"{model.Moneda.Simbolo} {model.Lider.MontoPrimaNeta.ToString("N2")}";
             var porcentajeLider = $"{model.Lider.PorcentajeParticipacion.ToString("N2")} %";
 
             lblCoaseguradoraLider.Text = model.Lider.Nombre;
@@ -127,8 +109,8 @@ namespace CoaseguroWinForms
             var montoTotal = model.GMX.MontoParticipacion + model.Lider.MontoParticipacion;
             var primaNetaTotal = model.GMX.MontoPrimaNeta + model.Lider.MontoPrimaNeta;
 
-            lblMontoTotalParticipacion.Text = $"$ {montoTotal.ToString("N2")}";
-            lblPrimaNetaTotalParticipacion.Text = $"$ {primaNetaTotal.ToString("N2")}";
+            lblMontoTotalParticipacion.Text = $"{model.Moneda.Simbolo} {montoTotal.ToString("N2")}";
+            lblPrimaNetaTotalParticipacion.Text = $"{model.Moneda.Simbolo} {primaNetaTotal.ToString("N2")}";
             lblPorcentajeTotalParticipacion.Text = $"{porcentajeTotal.ToString("N2")} %";
         }
 
@@ -165,12 +147,12 @@ namespace CoaseguroWinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 model.PorcentajeFeeGMX = model.MontoFeeGMX = 0M;
-                lblMontoFeeGMX.Text = "$0.00";
+                lblMontoFeeGMX.Text = $"{model.Moneda.Simbolo} 0.00";
                 textBox.Clear();
             } else {
                 model.PorcentajeFeeGMX = porcentaje;
                 model.MontoFeeGMX = decimal.Round(porcentaje * model.PrimaNeta / 100M, 2);
-                lblMontoFeeGMX.Text = $"$ {model.MontoFeeGMX.ToString("N2")}";
+                lblMontoFeeGMX.Text = $"{model.Moneda.Simbolo} {model.MontoFeeGMX.ToString("N2")}";
             }
         }
 
@@ -210,7 +192,7 @@ namespace CoaseguroWinForms
 
             if (radio.Checked) {
                 model.PorcentajePagoSiniestro = null;
-                lblMontoSiniestro.Text = "$ 0.00";
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
                 txtPorcentajeSiniestro.Clear();
                 txtPorcentajeSiniestro.Enabled = false;
             } else {
@@ -251,12 +233,12 @@ namespace CoaseguroWinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 model.PorcentajePagoSiniestro = 0M;
-                lblMontoSiniestro.Text = "$ 0.00";
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
                 textBox.Clear();
             } else {
                 model.PorcentajePagoSiniestro = porcentaje;
                 var monto = decimal.Round(porcentaje * model.GMX.MontoParticipacion / 100M, 2);
-                lblMontoSiniestro.Text = $"$ {monto.ToString("N2")}";
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {monto.ToString("N2")}";
             }
         }
 

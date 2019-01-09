@@ -9,6 +9,8 @@ namespace CoaseguroWinForms.DAL.Entities
     public class CoaseguroContext : DbContext
     {
         public virtual DbSet<mcia> mcia { get; set; }
+        public virtual DbSet<pv_cia_lider> pv_cia_lider { get; set; }
+        public virtual DbSet<pv_cia_lider_wkf> pv_cia_lider_wkf { get; set; }
         public virtual DbSet<pv_coas_cia> pv_coas_cia { get; set; }
         public virtual DbSet<pv_coas_cia_wkf> pv_coas_cia_wkf { get; set; }
         public virtual DbSet<pv_header> pv_header { get; set; }
@@ -18,7 +20,6 @@ namespace CoaseguroWinForms.DAL.Entities
         public virtual DbSet<pv_importe_coas_wkf> pv_importe_coas_wkf { get; set; }
         public virtual DbSet<pv_importe_wkf> pv_importe_wkf { get; set; }
         public virtual DbSet<tmoneda> tmoneda { get; set; }
-
 
         /// <summary>
         /// Genera una nueva conexión a la base de datos indicada en la cadena
@@ -135,6 +136,86 @@ namespace CoaseguroWinForms.DAL.Entities
             modelBuilder.Entity<mcia>()
                 .Property(e => e.sn_transferencia)
                 .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.pje_partic)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.txt_poliza_lider)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.pje_comision)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.sn_admin_com_n)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.sn_admin_com_e)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.sn_rec_partic)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.sn_rec_recl)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.txt_anexo_lider)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.pje_gtos)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider>()
+                .Property(e => e.pje_reserva)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.pje_partic)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.txt_poliza_lider)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.pje_comision)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.sn_admin_com_n)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.sn_admin_com_e)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.sn_rec_partic)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.sn_rec_recl)
+                .HasPrecision(1, 0);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.txt_anexo_lider)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.pje_gtos)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<pv_cia_lider_wkf>()
+                .Property(e => e.pje_reserva)
+                .HasPrecision(5, 2);
 
             modelBuilder.Entity<pv_coas_cia>()
                 .Property(e => e.cod_cia_part)

@@ -15,10 +15,11 @@ Declare @IdPv Int = 520179;   -- Coaseguro negativo (devolución) con más de un
 
 -- Obtener divisa
 Declare @IdMoneda Decimal;
+
 Select @IdMoneda = tmoneda.cod_moneda
-    From [pv_header] As header
-        Inner Join [tmoneda] As tmoneda On header.cod_moneda = tmoneda.cod_moneda
-    Where header.id_pv = @IdPv;
+From [pv_header] As header
+    Inner Join [tmoneda] As tmoneda On header.cod_moneda = tmoneda.cod_moneda
+Where header.id_pv = @IdPv;
 
 Select
     tmoneda.cod_moneda As Id,
