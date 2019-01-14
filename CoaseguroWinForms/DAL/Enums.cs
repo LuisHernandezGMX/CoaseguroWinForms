@@ -7,7 +7,7 @@ namespace CoaseguroWinForms.DAL
     /// </summary>
     public enum MetodoPago
     {
-        EstadoCuenta,
+        EstadoCuenta = 1,
         Conceptos
     }
 
@@ -16,17 +16,23 @@ namespace CoaseguroWinForms.DAL
     /// </summary>
     public enum PagoComisionAgente
     {
-        Lider100,
+        Lider100 = 1,
         Participacion
+    }
+
+    /// <summary>
+    /// La forma de pago del siniestro.
+    /// </summary>
+    public enum PagoSiniestro
+    {
+        Participacion = 1,
+        CienPorCiento
     }
 
     /// <summary>
     /// Los días que se tienen disponibles para realizar el
     /// pago del siniestro. La primera opción (30 días) son
     /// los que exige la Ley sobre el Contrato de Seguro.
-    /// TODO: Se inicia la enumeración en 1 por si estos
-    /// valores se convierten posteriormente a una tabla
-    /// individual en la base de datos.
     /// </summary>
     public enum DiasGarantiaPago
     {

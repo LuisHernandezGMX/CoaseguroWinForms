@@ -23,7 +23,9 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
             var model = new SeguidorViewModel {
                 MetodoPago = MetodoPago.EstadoCuenta,
                 PagoComisionAgente = PagoComisionAgente.Lider100,
+                PagoSiniestro = PagoSiniestro.Participacion,
                 PorcentajePagoSiniestro = null,
+                MontoSiniestro = null,
                 GarantiaPago = DiasGarantiaPago.TreintaDias
             };
 

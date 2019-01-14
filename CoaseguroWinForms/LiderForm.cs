@@ -236,13 +236,15 @@ namespace CoaseguroWinForms
             var radio = sender as RadioButton;
 
             if (radio.Checked) {
-                txtPorcentajeSiniestro.Text = string.Empty;
+                model.PagoSiniestro = PagoSiniestro.Participacion;
+                model.PorcentajePagoSiniestro = model.MontoSiniestro = null;
+                txtPorcentajeSiniestro.Clear();
                 txtPorcentajeSiniestro.Enabled = false;
                 lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
-                model.PorcentajePagoSiniestro = null;
             } else {
+                model.PagoSiniestro = PagoSiniestro.CienPorCiento;
+                model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
                 txtPorcentajeSiniestro.Enabled = true;
-                model.PorcentajePagoSiniestro = 0M;
             }
         }
 
@@ -276,12 +278,12 @@ namespace CoaseguroWinForms
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
-                model.PorcentajePagoSiniestro = 0M;
+                model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
                 textBox.Clear();
             } else {
                 model.PorcentajePagoSiniestro = porcentaje;
-                var monto = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
-                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {monto.ToString("N2")}";
+                model.MontoSiniestro = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {model.MontoSiniestro.Value.ToString("N2")}";
             }
         }
 
@@ -318,16 +320,27 @@ namespace CoaseguroWinForms
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            Close();
+            var result = MessageBox.Show(this,
+                "¿Está seguro de que quiere regresar? Perderá todos los datos registrados en esta pantalla hasta el momento.",
+                "Atrás",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.OK) {
+                Close();
+            }
         }
 
         private void btnSuspender_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
     }

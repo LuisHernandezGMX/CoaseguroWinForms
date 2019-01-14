@@ -54,12 +54,24 @@
         public PagoComisionAgente PagoComisionAgente { get; set; }
 
         /// <summary>
+        /// La forma de pago del siniestro.
+        /// </summary>
+        public PagoSiniestro PagoSiniestro { get; set; }
+
+        /// <summary>
         /// Porcentaje del monto máximo para pago automático de siniestro.
         /// Este campo contiene el porcentaje SOLO si se eligió la opción
         /// correspondiente. Si el pago del siniestro se hace a participación,
         /// este campo deberá ser NULO.
         /// </summary>
         public decimal? PorcentajePagoSiniestro { get; set; }
+
+        /// <summary>
+        /// Monto máximo para pago automático de siniestro. Este campo contiene
+        /// el monto SOLO si se eligió la opción correspondiente. Si el pago del
+        /// siniestro se hace a participación, este campo deberá ser NULO.
+        /// </summary>
+        public decimal? MontoSiniestro { get; set; }
 
         /// <summary>
         /// Garantía de pago del siniestro. Contiene el valor correspondiente
