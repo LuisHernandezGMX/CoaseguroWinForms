@@ -126,5 +126,10 @@
         /// La descripción de esta moneda.
         /// </summary>
         public string Descripcion { get; set; }
+
+        /// <summary>
+        /// El importe de cambio en moneda equivalente de la póliza.
+        /// </summary>
+        public decimal ImporteCambio { get; set; }
     }
 }

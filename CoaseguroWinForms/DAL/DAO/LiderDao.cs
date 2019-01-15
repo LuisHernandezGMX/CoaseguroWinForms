@@ -37,7 +37,8 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
                     .Select(header => new TipoMonedaViewModel {
                         Id = header.tmoneda.cod_moneda,
                         Simbolo = header.tmoneda.txt_desc_redu,
-                        Descripcion = header.tmoneda.txt_desc
+                        Descripcion = header.tmoneda.txt_desc,
+                        ImporteCambio = header.imp_cambio
                     })
                     .FirstOrDefault();
 
