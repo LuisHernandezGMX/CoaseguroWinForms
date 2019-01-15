@@ -12,6 +12,8 @@ namespace CoaseguroWinForms.DAL.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tmoneda()
         {
+            CoaseguroPrincipal = new HashSet<CoaseguroPrincipal>();
+            CoaseguroPrincipalWkf = new HashSet<CoaseguroPrincipalWkf>();
             pv_header = new HashSet<pv_header>();
         }
 
@@ -56,6 +58,12 @@ namespace CoaseguroWinForms.DAL.Entities
         public byte? cnt_decimales_iva { get; set; }
 
         public byte? cnt_decimales_comis { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguroPrincipal> CoaseguroPrincipal { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguroPrincipalWkf> CoaseguroPrincipalWkf { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pv_header> pv_header { get; set; }

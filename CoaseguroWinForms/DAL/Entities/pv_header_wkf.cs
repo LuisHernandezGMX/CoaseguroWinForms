@@ -8,6 +8,12 @@ namespace CoaseguroWinForms.DAL.Entities
 
     public partial class pv_header_wkf
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public pv_header_wkf()
+        {
+            CoaseguroPrincipalWkf = new HashSet<CoaseguroPrincipalWkf>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_pv { get; set; }
@@ -127,5 +133,8 @@ namespace CoaseguroWinForms.DAL.Entities
 
         [Column(TypeName = "numeric")]
         public decimal? id_sol_cotiz { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguroPrincipalWkf> CoaseguroPrincipalWkf { get; set; }
     }
 }

@@ -85,9 +85,19 @@
     <Compile Include="Business\Observers\TotalMontoParticipacionObserver.cs" />
     <Compile Include="DAL\DAO\LiderDao.cs" />
     <Compile Include="DAL\DAO\SeguidorDao.cs" />
+    <Compile Include="DAL\Entities\CoaseguradorasFee.cs" />
+    <Compile Include="DAL\Entities\CoaseguradorasFeeWkf.cs" />
+    <Compile Include="DAL\Entities\CoaseguradorasParticipantes.cs" />
+    <Compile Include="DAL\Entities\CoaseguradorasParticipantesWkf.cs" />
+    <Compile Include="DAL\Entities\CoaseguroPrincipal.cs" />
+    <Compile Include="DAL\Entities\CoaseguroPrincipalWkf.cs" />
+    <Compile Include="DAL\Entities\GarantiaPagoCoaseguro.cs" />
+    <Compile Include="DAL\Entities\mcia.cs" />
+    <Compile Include="DAL\Entities\MetodoPagoCoaseguro.cs" />
+    <Compile Include="DAL\Entities\PagoComisionAgenteCoaseguro.cs" />
+    <Compile Include="DAL\Entities\PagoSiniestroCoaseguro.cs" />
     <Compile Include="DAL\Entities\pv_cia_lider.cs" />
     <Compile Include="DAL\Entities\pv_cia_lider_wkf.cs" />
-    <Compile Include="DAL\Entities\mcia.cs" />
     <Compile Include="DAL\Entities\pv_coas_cia.cs" />
     <Compile Include="DAL\Entities\pv_coas_cia_wkf.cs" />
     <Compile Include="DAL\Entities\pv_header.cs" />
@@ -97,6 +107,7 @@
     <Compile Include="DAL\Entities\pv_importe_coas_wkf.cs" />
     <Compile Include="DAL\Entities\pv_importe_wkf.cs" />
     <Compile Include="DAL\Entities\tmoneda.cs" />
+    <Compile Include="DAL\Entities\ttipo_mov.cs" />
     <Compile Include="DAL\Entities\CoaseguroContext.cs" />
     <Compile Include="DAL\ViewModels\Bases.cs" />
     <Compile Include="DAL\ViewModels\LiderViewModels.cs" />
@@ -164,6 +175,7 @@
     <Content Include="SQL\ConsultasLider.sql" />
     <Content Include="SQL\ConsultasSeguidor.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

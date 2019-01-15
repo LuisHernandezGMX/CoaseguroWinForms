@@ -9,6 +9,15 @@ namespace CoaseguroWinForms.DAL.Entities
     [Table("mcia")]
     public partial class mcia
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mcia()
+        {
+            CoaseguradorasFee = new HashSet<CoaseguradorasFee>();
+            CoaseguradorasFeeWkf = new HashSet<CoaseguradorasFeeWkf>();
+            CoaseguradorasParticipantes = new HashSet<CoaseguradorasParticipantes>();
+            CoaseguradorasParticipantesWkf = new HashSet<CoaseguradorasParticipantesWkf>();
+        }
+
         [Key]
         [Column(TypeName = "numeric")]
         public decimal cod_cia { get; set; }
@@ -102,5 +111,17 @@ namespace CoaseguroWinForms.DAL.Entities
 
         [Column(TypeName = "numeric")]
         public decimal? sn_transferencia { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguradorasFee> CoaseguradorasFee { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguradorasFeeWkf> CoaseguradorasFeeWkf { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguradorasParticipantes> CoaseguradorasParticipantes { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguradorasParticipantesWkf> CoaseguradorasParticipantesWkf { get; set; }
     }
 }

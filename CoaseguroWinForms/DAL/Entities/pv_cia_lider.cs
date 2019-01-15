@@ -49,5 +49,7 @@ namespace CoaseguroWinForms.DAL.Entities
 
         [Column(TypeName = "numeric")]
         public decimal? pje_reserva { get; set; }
+
+        public virtual pv_header pv_header { get; set; }
     }
 }

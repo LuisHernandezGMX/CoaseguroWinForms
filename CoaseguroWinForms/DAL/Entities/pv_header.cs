@@ -11,6 +11,7 @@ namespace CoaseguroWinForms.DAL.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public pv_header()
         {
+            CoaseguroPrincipal = new HashSet<CoaseguroPrincipal>();
             pv_importe = new HashSet<pv_importe>();
         }
 
@@ -133,6 +134,11 @@ namespace CoaseguroWinForms.DAL.Entities
 
         [Column(TypeName = "numeric")]
         public decimal? id_sol_cotiz { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoaseguroPrincipal> CoaseguroPrincipal { get; set; }
+
+        public virtual pv_cia_lider pv_cia_lider { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pv_importe> pv_importe { get; set; }
