@@ -40,6 +40,10 @@ namespace CoaseguroWinForms.DAL.Entities
 
         public decimal MontoParticipacionGMXEquivalente { get; set; }
 
+        public decimal PrimaGMX { get; set; }
+
+        public decimal PrimaGMXEquivalente { get; set; }
+
         public int IdMetodoPago { get; set; }
 
         public int IdPagoComisionAgente { get; set; }

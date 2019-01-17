@@ -16,15 +16,11 @@ namespace CoaseguroWinForms.DAL.Entities
         [Column(TypeName = "numeric")]
         public decimal cod_cia { get; set; }
 
-        public decimal PorcentajeParticipacion { get; set; }
+        public decimal PorcentajeFee { get; set; }
 
-        public decimal MontoParticipacion { get; set; }
+        public decimal MontoFee { get; set; }
 
-        public decimal MontoParticipacionEquivalente { get; set; }
-
-        public decimal MontoPrima { get; set; }
-
-        public decimal MontoPrimaEquivalente { get; set; }
+        public decimal MontoFeeEquivalente { get; set; }
 
         public virtual CoaseguroPrincipal CoaseguroPrincipal { get; set; }
 

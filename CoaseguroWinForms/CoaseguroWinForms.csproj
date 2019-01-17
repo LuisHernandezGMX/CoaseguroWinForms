@@ -83,6 +83,7 @@
     <Compile Include="Business\Observers\LimiteMaximoResponsabilidadSubject.cs" />
     <Compile Include="Business\Observers\SiniestroObserver.cs" />
     <Compile Include="Business\Observers\TotalMontoParticipacionObserver.cs" />
+    <Compile Include="DAL\DAO\BaseDao.cs" />
     <Compile Include="DAL\DAO\LiderDao.cs" />
     <Compile Include="DAL\DAO\SeguidorDao.cs" />
     <Compile Include="DAL\Entities\CoaseguradorasFee.cs" />

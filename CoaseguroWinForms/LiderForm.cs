@@ -32,9 +32,21 @@ namespace CoaseguroWinForms
         private bool eventoFeeActivado = false;
 
         /// <summary>
+        /// Indica si es la primera vez que se registra un coaseguro
+        /// en la tabla [CoaseguroPrincipal] relacionada a la póliza
+        /// indicada.
+        /// </summary>
+        private bool esCoaseguroNuevo;
+
+        /// <summary>
         /// Almacena todo el estado del formulario.
         /// </summary>
         private LiderViewModel model;
+
+        /// <summary>
+        /// Acceso a operaciones en capa de persistencia para este formulario.
+        /// </summary>
+        private LiderDao dao;
 
         #endregion
 
@@ -50,14 +62,36 @@ namespace CoaseguroWinForms
 
             var connection = new Conecction();
             connection.GetStringConnection(sCommand);
-            model = LiderDao.RellenarModelo(idPv, connection.ConecctionSII);
 
-            InitializeComponent();
-            InicializarCmbGarantiaPago();
-            InicializarInformacionFormulario();
+            try {
+                dao = new LiderDao(idPv, connection.ConecctionSII);
+                esCoaseguroNuevo = dao.EsCoaseguroNuevo();
 
-            lblEntorno.Text = connection.Base;
-            lblNombreUsuario.Text = connection.User;
+                model = esCoaseguroNuevo
+                    ? dao.RellenarNuevoModelo()
+                    : dao.ActualizarYRellenarModelo();
+
+                InitializeComponent();
+                InicializarCmbGarantiaPago();
+                InicializarInformacionFormulario();
+
+                lblEntorno.Text = connection.Base;
+                lblNombreUsuario.Text = connection.User;
+
+                if (!esCoaseguroNuevo) {
+                    ActualizarFormulario();
+                }
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+
+                MessageBox.Show(this,
+                    $"Ocurrió un error al leer la póliza de la base de datos.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Leer Póliza",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                Environment.Exit(1);
+            }
         }
 
         /// <summary>
@@ -66,6 +100,11 @@ namespace CoaseguroWinForms
         /// </summary>
         private void InicializarCmbGarantiaPago()
         {
+            // Efecto Secundario.
+            // Al asignar la enumeración al DataSource de cmbGarantiaPago se reinicia por alguna razón la propiedad del VistaModelo.
+            // Referencia: https://stackoverflow.com/questions/641809/displaymember-getting-reset-on-datasource-null
+            var garantiaPago = model.GarantiaPago;
+
             cmbGarantiaPago.DisplayMember = "Name";
             cmbGarantiaPago.ValueMember = "ValorEnum";
             cmbGarantiaPago.DataSource = Enum
@@ -78,6 +117,8 @@ namespace CoaseguroWinForms
                 })
                 .OrderBy(v => v.ValorEnum)
                 .ToList();
+
+            model.GarantiaPago = garantiaPago;
         }
 
         /// <summary>
@@ -143,6 +184,54 @@ namespace CoaseguroWinForms
             lblPorcentajeCoaseguradoras.Text = $" {model.PorcentajeTotalParticipacion.ToString("N2")} %";
             lblMontoCoaseguradoras.Text = $"{model.Moneda.Simbolo} {model.MontoTotalParticipacion.ToString("N2")}";
             lblPrimaNetaTotalParticipacion.Text = $"{model.Moneda.Simbolo} {model.MontoPrimaNetaTotalParticipacion.ToString("N2")}";
+        }
+
+        /// <summary>
+        /// Actualiza los campos necesarios del formulario cuando el coaseguro ya existe.
+        /// </summary>
+        private void ActualizarFormulario()
+        {
+            // Fee de Coaseguradoras
+            int i = 0;
+            foreach (DataGridViewRow row in gridFee.Rows) {
+                var porcentajeFee = row.Cells[1];
+                var montoFee = row.Cells[2];
+
+                porcentajeFee.Value = model.Coaseguradoras[i].PorcentajeFee.ToString();
+                montoFee.Value = $"{model.Moneda.Simbolo} {model.Coaseguradoras[i].MontoFee.ToString("N2")}";
+                i++;
+            }
+
+            // Siniestros
+            if (model.PagoSiniestro == PagoSiniestro.CienPorCiento) {
+                var porcentajeSiniestro = model.PorcentajePagoSiniestro.Value;
+                var montoSiniestro = model.MontoSiniestro.Value;
+
+                rdbSiniestro100.Checked = true;
+                rdbSiniestroParticipacion.Checked = false;
+                txtPorcentajeSiniestro.Text = porcentajeSiniestro.ToString();
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {montoSiniestro.ToString("N2")}";
+
+                model.MontoSiniestro = montoSiniestro;
+                model.PorcentajePagoSiniestro = porcentajeSiniestro;
+            }
+
+            // Método de Pago, Pago de Comisión a Agente y Garantía de Pago
+            if (model.MetodoPago == MetodoPago.Conceptos) {
+                rdbPorConceptos.Checked = true;
+                rdbEstadoCuenta.Checked = false;
+            }
+
+            if (model.PagoComisionAgente == PagoComisionAgente.Participacion) {
+                rdbPagoParticipacion.Checked = true;
+                rdbLider100.Checked = false;
+            }
+
+            if (model.GarantiaPago != DiasGarantiaPago.TreintaDias) {
+                cmbGarantiaPago.SelectedValue = model.GarantiaPago;
+                rdbGarantiaPagoOtro.Checked = true;
+                rdbContratoSeguro.Checked = false;
+            }
         }
 
         /// <summary>
@@ -320,8 +409,28 @@ namespace CoaseguroWinForms
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = false;
+
+            try {
+                if (esCoaseguroNuevo) {
+                    dao.GuardarCoaseguro(model);
+                } else {
+                    dao.ActualizarCoaseguro(model);
+                }
+                
+                MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+
+                MessageBox.Show(this,
+                    $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Guardar Coaseguro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = true;
+            }
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
@@ -340,8 +449,27 @@ namespace CoaseguroWinForms
 
         private void btnSuspender_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = false;
+
+            try {
+                if (esCoaseguroNuevo) {
+                    dao.GuardarCoaseguro(model);
+                } else {
+                    dao.ActualizarCoaseguro(model);
+                }
+
+                MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                MessageBox.Show(this,
+                    $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Guardar Coaseguro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = true;
+            }
         }
     }
 }

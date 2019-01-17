@@ -3,6 +3,15 @@
 namespace CoaseguroWinForms.DAL
 {
     /// <summary>
+    /// El tipo de coaseguro a manejar.
+    /// </summary>
+    public enum TipoMovimiento
+    {
+        Seguidor = 2,
+        Lider
+    }
+
+    /// <summary>
     /// El método de pago en el coaseguro.
     /// </summary>
     public enum MetodoPago
