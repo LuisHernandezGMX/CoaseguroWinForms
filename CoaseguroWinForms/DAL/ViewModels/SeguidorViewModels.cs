@@ -11,6 +11,11 @@
         public CoaseguradoraLiderViewModel Lider { get; set; }
 
         /// <summary>
+        /// El Id de GMX como coaseguradora.
+        /// </summary>
+        public int IdGMX { get; set; }
+
+        /// <summary>
         /// El porcentaje de Fee por administración de GMX.
         /// </summary>
         public decimal PorcentajeFeeGMX { get; set; }
@@ -27,6 +32,11 @@
     /// </summary>
     public class CoaseguradoraLiderViewModel
     {
+        /// <summary>
+        /// Id de la coaseguradora.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Nombre de la coaseguradora.
         /// </summary>

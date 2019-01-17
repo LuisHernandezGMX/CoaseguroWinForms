@@ -286,9 +286,13 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
             using (var db = new CoaseguroContext(connectionString))
             using (var transaction = db.Database.BeginTransaction()) {
                 try {
+                    var coaseguroPrincipal = db.CoaseguroPrincipal.FirstOrDefault(principal => principal.id_pv == idPv);
+
                     // Fee por Administración
                     foreach (var coas in model.Coaseguradoras) {
-                        var coasFee = db.CoaseguradorasFee.FirstOrDefault(fee => fee.cod_cia == coas.Id);
+                        var coasFee = db
+                            .CoaseguradorasFee
+                            .FirstOrDefault(fee => fee.IdCoaseguro == coaseguroPrincipal.Id && fee.cod_cia == coas.Id);
 
                         coasFee.PorcentajeFee = coas.PorcentajeFee;
                         coasFee.MontoFee = decimal.Round(coas.PorcentajeFee * model.PrimaNeta / 100M, 2);
@@ -300,8 +304,6 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
                     db.SaveChanges();
 
                     // Método de Pago, Pago por Comisión, Pago de Siniestro y Garantía de Pago
-                    var coaseguroPrincipal = db.CoaseguroPrincipal.FirstOrDefault(principal => principal.id_pv == idPv);
-
                     coaseguroPrincipal.IdMetodoPago = (int)model.MetodoPago;
                     coaseguroPrincipal.IdPagoComisionAgente = (int)model.PagoComisionAgente;
                     coaseguroPrincipal.IdGarantiaPago = (int)model.GarantiaPago;

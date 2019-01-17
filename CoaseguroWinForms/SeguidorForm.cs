@@ -25,9 +25,21 @@ namespace CoaseguroWinForms
         private int idPv;
 
         /// <summary>
+        /// Indica si es la primera vez que se registra un coaseguro
+        /// en la tabla [CoaseguroPrincipal] relacionada a la póliza
+        /// indicada.
+        /// </summary>
+        private bool esCoaseguroNuevo;
+
+        /// <summary>
         /// Almacena todo el estado del formulario.
         /// </summary>
         private SeguidorViewModel model;
+
+        /// <summary>
+        /// Almacena todo el estado del formulario
+        /// </summary>
+        private SeguidorDao dao;
 
         #endregion
 
@@ -43,14 +55,36 @@ namespace CoaseguroWinForms
 
             var connection = new Conecction();
             connection.GetStringConnection(sCommand);
-            model = SeguidorDao.RellenarModelo(idPv, connection.ConecctionSII);
 
-            InitializeComponent();
-            InicializarCmbGarantiaPago();
-            InicializarInformacionFormulario();
+            try {
+                dao = new SeguidorDao(idPv, connection.ConecctionSII);
+                esCoaseguroNuevo = dao.EsCoaseguroNuevo();
 
-            lblNombreUsuario.Text = connection.User;
-            lblEntorno.Text = connection.Base;
+                model = esCoaseguroNuevo
+                    ? dao.RellenarNuevoModelo()
+                    : dao.ActualizarYRellenarModelo();
+
+                InitializeComponent();
+                InicializarCmbGarantiaPago();
+                InicializarInformacionFormulario();
+
+                lblNombreUsuario.Text = connection.User;
+                lblEntorno.Text = connection.Base;
+
+                if (!esCoaseguroNuevo) {
+                    ActualizarFormulario();
+                }
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+
+                MessageBox.Show(this,
+                    $"Ocurrió un error al leer la póliza de la base de datos.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Leer Póliza",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                Environment.Exit(1);
+            }
         }
 
         /// <summary>
@@ -59,6 +93,11 @@ namespace CoaseguroWinForms
         /// </summary>
         private void InicializarCmbGarantiaPago()
         {
+            // Efecto Secundario.
+            // Al asignar la enumeración al DataSource de cmbGarantiaPago se reinicia por alguna razón la propiedad del VistaModelo.
+            // Referencia: https://stackoverflow.com/questions/641809/displaymember-getting-reset-on-datasource-null
+            var garantiaPago = model.GarantiaPago;
+
             cmbGarantiaPago.DisplayMember = "Name";
             cmbGarantiaPago.ValueMember = "ValorEnum";
             cmbGarantiaPago.DataSource = Enum
@@ -71,6 +110,8 @@ namespace CoaseguroWinForms
                 })
                 .OrderBy(v => v.ValorEnum)
                 .ToList();
+
+            model.GarantiaPago = garantiaPago;
         }
 
         /// <summary>
@@ -105,13 +146,54 @@ namespace CoaseguroWinForms
             lblParticipacionCoaseguradoraLider.Text = porcentajeLider;
 
             // Total de Participación
-            var porcentajeTotal = model.GMX.Porcentaje + model.Lider.PorcentajeParticipacion;
-            var montoTotal = model.GMX.MontoParticipacion + model.Lider.MontoParticipacion;
-            var primaNetaTotal = model.GMX.MontoPrimaNeta + model.Lider.MontoPrimaNeta;
+            model.MontoTotalParticipacion = model.GMX.MontoParticipacion + model.Lider.MontoParticipacion;
+            model.MontoPrimaNetaTotalParticipacion = model.GMX.MontoPrimaNeta + model.Lider.MontoPrimaNeta;
+            model.PorcentajeTotalParticipacion = model.GMX.Porcentaje + model.Lider.PorcentajeParticipacion;
 
-            lblMontoTotalParticipacion.Text = $"{model.Moneda.Simbolo} {montoTotal.ToString("N2")}";
-            lblPrimaNetaTotalParticipacion.Text = $"{model.Moneda.Simbolo} {primaNetaTotal.ToString("N2")}";
-            lblPorcentajeTotalParticipacion.Text = $"{porcentajeTotal.ToString("N2")} %";
+            lblPorcentajeTotalParticipacion.Text = $"{model.PorcentajeTotalParticipacion.ToString("N2")} %";
+            lblMontoTotalParticipacion.Text = $"{model.Moneda.Simbolo} {model.MontoTotalParticipacion.ToString("N2")}";
+            lblPrimaNetaTotalParticipacion.Text = $"{model.Moneda.Simbolo} {model.MontoPrimaNetaTotalParticipacion.ToString("N2")}";
+        }
+
+        /// <summary>
+        /// Actualiza los campos necesarios del formulario cuando el coaseguro ya existe.
+        /// </summary>
+        private void ActualizarFormulario()
+        {
+            // Fee de GMX
+            txtPorcentajeFeeGMX.Text = model.PorcentajeFeeGMX.ToString();
+            lblMontoFeeGMX.Text = $"{model.Moneda.Simbolo} {model.MontoFeeGMX.ToString("N2")}";
+
+            // Siniestros
+            if (model.PagoSiniestro == PagoSiniestro.CienPorCiento) {
+                var porcentajeSiniestro = model.PorcentajePagoSiniestro.Value;
+                var montoSiniestro = model.MontoSiniestro.Value;
+
+                rdbSiniestro100.Checked = true;
+                rdbSiniestroParticipacion.Checked = false;
+                txtPorcentajeSiniestro.Text = porcentajeSiniestro.ToString();
+                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {montoSiniestro.ToString("N2")}";
+
+                model.MontoSiniestro = montoSiniestro;
+                model.PorcentajePagoSiniestro = porcentajeSiniestro;
+            }
+
+            // Método de Pago, Pago de Comisión a Agente y Garantía de Pago
+            if (model.MetodoPago == MetodoPago.Conceptos) {
+                rdbPorConceptos.Checked = true;
+                rdbEstadoCuenta.Checked = false;
+            }
+
+            if (model.PagoComisionAgente == PagoComisionAgente.Participacion) {
+                rdbPagoParticipacion.Checked = true;
+                rdbLider100.Checked = false;
+            }
+
+            if (model.GarantiaPago != DiasGarantiaPago.TreintaDias) {
+                cmbGarantiaPago.SelectedValue = model.GarantiaPago;
+                rdbGarantiaPagoOtro.Checked = true;
+                rdbContratoSeguro.Checked = false;
+            }
         }
 
         /// <summary>
@@ -277,8 +359,28 @@ namespace CoaseguroWinForms
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = false;
+
+            try {
+                if (esCoaseguroNuevo) {
+                    dao.GuardarCoaseguro(model);
+                } else {
+                    dao.ActualizarCoaseguro(model);
+                }
+
+                MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+
+                MessageBox.Show(this,
+                    $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Guardar Coaseguro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = true;
+            }
         }
 
         private void btnAtras_Click(object sender, EventArgs e)
@@ -297,8 +399,27 @@ namespace CoaseguroWinForms
 
         private void btnSuspender_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = false;
+
+            try {
+                if (esCoaseguroNuevo) {
+                    dao.GuardarCoaseguro(model);
+                } else {
+                    dao.ActualizarCoaseguro(model);
+                }
+
+                MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            } catch (Exception ex) {
+                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                MessageBox.Show(this,
+                    $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
+                    "Error al Guardar Coaseguro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                btnSiguiente.Enabled = btnSuspender.Enabled = btnAtras.Enabled = true;
+            }
         }
     }
 }
