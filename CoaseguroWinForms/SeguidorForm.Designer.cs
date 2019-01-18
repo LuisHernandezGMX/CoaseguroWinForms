@@ -901,6 +901,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1059, 431);
+            this.ControlBox = false;
             this.Controls.Add(this.btnSuspender);
             this.Controls.Add(this.btnAtras);
             this.Controls.Add(this.btnSiguiente);

@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\Sistran.Data.dll" />
+    <Content Include="SQL\ConsultasGenerales.sql" />
     <Content Include="SQL\ConsultasLider.sql" />
     <Content Include="SQL\ConsultasSeguidor.sql" />
   </ItemGroup>
