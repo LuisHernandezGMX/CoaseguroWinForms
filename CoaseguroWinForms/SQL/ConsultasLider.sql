@@ -3,7 +3,8 @@
 -- *****************************************************
 
 --Declare @IdPv Int = 711062; -- Coaseguro con cifras altas.
-Declare @IdPv Int = 520179;   -- Coaseguro negativo (devolución) con más de un seguidor
+--Declare @IdPv Int = 520179;   -- Coaseguro negativo (devolución) con más de un seguidor
+Declare @IdPv Int = 453292;
 
 -- Consulta pequeña para obtener coaseguros con más de un seguidor.
 

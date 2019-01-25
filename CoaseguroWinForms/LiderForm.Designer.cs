@@ -129,7 +129,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.35802F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.64198F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tableLayoutPanel3.Controls.Add(this.lblPrimaNeta, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblLimiteMaximoResponsabilidad, 1, 1);
@@ -149,9 +149,9 @@
             this.lblPrimaNeta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPrimaNeta.AutoSize = true;
             this.lblPrimaNeta.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrimaNeta.Location = new System.Drawing.Point(508, 22);
+            this.lblPrimaNeta.Location = new System.Drawing.Point(507, 22);
             this.lblPrimaNeta.Name = "lblPrimaNeta";
-            this.lblPrimaNeta.Size = new System.Drawing.Size(128, 13);
+            this.lblPrimaNeta.Size = new System.Drawing.Size(129, 13);
             this.lblPrimaNeta.TabIndex = 5;
             this.lblPrimaNeta.Text = "$ 0.00";
             this.lblPrimaNeta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -175,7 +175,7 @@
             this.lblLimiteMaximoResponsabilidad.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLimiteMaximoResponsabilidad.Location = new System.Drawing.Point(161, 22);
             this.lblLimiteMaximoResponsabilidad.Name = "lblLimiteMaximoResponsabilidad";
-            this.lblLimiteMaximoResponsabilidad.Size = new System.Drawing.Size(341, 13);
+            this.lblLimiteMaximoResponsabilidad.Size = new System.Drawing.Size(340, 13);
             this.lblLimiteMaximoResponsabilidad.TabIndex = 3;
             this.lblLimiteMaximoResponsabilidad.Text = "$ 0.00";
             this.lblLimiteMaximoResponsabilidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,7 +187,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(161, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(341, 13);
+            this.label2.Size = new System.Drawing.Size(340, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Límite Máximo de Responsabilidad al 100%";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -209,9 +209,9 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(508, 2);
+            this.label9.Location = new System.Drawing.Point(507, 2);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(128, 13);
+            this.label9.Size = new System.Drawing.Size(129, 13);
             this.label9.TabIndex = 4;
             this.label9.Text = "Prima Neta";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,7 +235,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.17647F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.82353F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblMontoCoaseguradoras, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
@@ -263,7 +263,7 @@
             this.lblMontoCoaseguradoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoCoaseguradoras.AutoSize = true;
             this.lblMontoCoaseguradoras.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(372, 5);
+            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(371, 5);
             this.lblMontoCoaseguradoras.Name = "lblMontoCoaseguradoras";
             this.lblMontoCoaseguradoras.Size = new System.Drawing.Size(119, 13);
             this.lblMontoCoaseguradoras.TabIndex = 2;
@@ -277,7 +277,7 @@
             this.lblPorcentajeCoaseguradoras.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(284, 5);
             this.lblPorcentajeCoaseguradoras.Name = "lblPorcentajeCoaseguradoras";
-            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(82, 13);
+            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(81, 13);
             this.lblPorcentajeCoaseguradoras.TabIndex = 1;
             this.lblPorcentajeCoaseguradoras.Text = "0%";
             this.lblPorcentajeCoaseguradoras.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,9 +287,9 @@
             this.lblPrimaNetaTotalParticipacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPrimaNetaTotalParticipacion.AutoSize = true;
             this.lblPrimaNetaTotalParticipacion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrimaNetaTotalParticipacion.Location = new System.Drawing.Point(497, 5);
+            this.lblPrimaNetaTotalParticipacion.Location = new System.Drawing.Point(496, 5);
             this.lblPrimaNetaTotalParticipacion.Name = "lblPrimaNetaTotalParticipacion";
-            this.lblPrimaNetaTotalParticipacion.Size = new System.Drawing.Size(117, 13);
+            this.lblPrimaNetaTotalParticipacion.Size = new System.Drawing.Size(118, 13);
             this.lblPrimaNetaTotalParticipacion.TabIndex = 3;
             this.lblPrimaNetaTotalParticipacion.Text = "$ 0.00";
             this.lblPrimaNetaTotalParticipacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -370,7 +370,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.03226F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.21774F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 2, 0);
@@ -411,9 +411,9 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(364, 4);
+            this.label7.Location = new System.Drawing.Point(364, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(129, 13);
+            this.label7.Size = new System.Drawing.Size(74, 21);
             this.label7.TabIndex = 2;
             this.label7.Text = "Monto de Participación";
             // 
@@ -436,7 +436,7 @@
             this.lblMontoGMX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMontoGMX.Location = new System.Drawing.Point(364, 25);
             this.lblMontoGMX.Name = "lblMontoGMX";
-            this.lblMontoGMX.Size = new System.Drawing.Size(129, 13);
+            this.lblMontoGMX.Size = new System.Drawing.Size(128, 13);
             this.lblMontoGMX.TabIndex = 4;
             this.lblMontoGMX.Text = "$ 0.00";
             this.lblMontoGMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -445,9 +445,9 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(499, 4);
+            this.label12.Location = new System.Drawing.Point(498, 4);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 13);
+            this.label12.Size = new System.Drawing.Size(125, 13);
             this.label12.TabIndex = 5;
             this.label12.Text = "Monto Prima Neta";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -457,9 +457,9 @@
             this.lblMontoPrimaNetaGMX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoPrimaNetaGMX.AutoSize = true;
             this.lblMontoPrimaNetaGMX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoPrimaNetaGMX.Location = new System.Drawing.Point(499, 25);
+            this.lblMontoPrimaNetaGMX.Location = new System.Drawing.Point(498, 25);
             this.lblMontoPrimaNetaGMX.Name = "lblMontoPrimaNetaGMX";
-            this.lblMontoPrimaNetaGMX.Size = new System.Drawing.Size(124, 13);
+            this.lblMontoPrimaNetaGMX.Size = new System.Drawing.Size(125, 13);
             this.lblMontoPrimaNetaGMX.TabIndex = 6;
             this.lblMontoPrimaNetaGMX.Text = "$ 0.00";
             this.lblMontoPrimaNetaGMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -485,6 +485,7 @@
             this.CompaniasFee,
             this.PorcentajeFee,
             this.MontoFee});
+            this.gridFee.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.gridFee.Location = new System.Drawing.Point(7, 20);
             this.gridFee.Name = "gridFee";
             this.gridFee.Size = new System.Drawing.Size(641, 152);
