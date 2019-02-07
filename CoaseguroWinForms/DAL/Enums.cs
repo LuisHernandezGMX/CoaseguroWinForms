@@ -39,6 +39,26 @@ namespace CoaseguroWinForms.DAL
     }
 
     /// <summary>
+    /// Indica cómo se calculará el límite máximo
+    /// de indemnización sin consultar a las
+    /// coaseguradoras.
+    /// </summary>
+    public enum IndemnizacionSiniestro
+    {
+        /// <summary>
+        /// Indica que el valor a leer para la indemnización
+        /// será el porcentaje del límite máximo.
+        /// </summary>
+        Porcentaje = 1,
+
+        /// <summary>
+        /// Indica que el valor a leer para la indemnización
+        /// será un monto específico.
+        /// </summary>
+        Monto
+    }
+
+    /// <summary>
     /// Los días que se tienen disponibles para realizar el
     /// pago del siniestro. La primera opción (30 días) son
     /// los que exige la Ley sobre el Contrato de Seguro.

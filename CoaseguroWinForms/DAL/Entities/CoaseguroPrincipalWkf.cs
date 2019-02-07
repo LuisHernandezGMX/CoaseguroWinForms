@@ -56,6 +56,8 @@ namespace CoaseguroWinForms.DAL.Entities
 
         public decimal? MontoSiniestroEquivalente { get; set; }
 
+        public int? FormaIndemnizacion { get; set; }
+
         public int IdGarantiaPago { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

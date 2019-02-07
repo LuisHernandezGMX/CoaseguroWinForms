@@ -74,6 +74,13 @@
         public decimal? MontoSiniestro { get; set; }
 
         /// <summary>
+        /// La forma de indemnización del siniestro. Puede utilizarse un porcentaje
+        /// sobre el Límite Máximo de Responsabilidad o un monto específico. Si el
+        /// pago del siniestro se hace a participación, este campo deberá ser NULO.
+        /// </summary>
+        public IndemnizacionSiniestro? FormaIndemnizacion { get; set; }
+
+        /// <summary>
         /// Garantía de pago del siniestro. Contiene el valor correspondiente
         /// de la enumeración, la cual equivale a los días que se tienen para
         /// realizar el pago del siniestro. Si se elige la opción de Ley sobre

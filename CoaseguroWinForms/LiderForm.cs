@@ -127,7 +127,7 @@ namespace CoaseguroWinForms
         private void InicializarInformacionFormulario()
         {
             // Etiqueta Monto Siniestro
-            lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
+            lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} 0.00";
 
             // Características del Coaseguro
             lblPrimaNeta.Text = $"{model.Moneda.Simbolo} {model.PrimaNeta.ToString("N2")}";
@@ -206,14 +206,25 @@ namespace CoaseguroWinForms
             if (model.PagoSiniestro == PagoSiniestro.CienPorCiento) {
                 var porcentajeSiniestro = model.PorcentajePagoSiniestro.Value;
                 var montoSiniestro = model.MontoSiniestro.Value;
+                var formaIndemnizacion = model.FormaIndemnizacion;
 
                 rdbSiniestro100.Checked = true;
                 rdbSiniestroParticipacion.Checked = false;
-                txtPorcentajeSiniestro.Text = porcentajeSiniestro.ToString();
-                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {montoSiniestro.ToString("N2")}";
 
                 model.MontoSiniestro = montoSiniestro;
                 model.PorcentajePagoSiniestro = porcentajeSiniestro;
+                model.FormaIndemnizacion = formaIndemnizacion;
+
+                lblPorcentajeIndemnizacion.Text = $"{model.PorcentajePagoSiniestro?.ToString("N2")} %";
+                lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} {model.MontoSiniestro?.ToString("N2")}";
+                txtMontoIndemnizacion.Text = (model.FormaIndemnizacion == IndemnizacionSiniestro.Porcentaje)
+                    ? model.PorcentajePagoSiniestro.ToString()
+                    : model.MontoSiniestro.ToString();
+
+                if (model.FormaIndemnizacion == IndemnizacionSiniestro.Monto) {
+                    rdbPorcentajeIndemnizacion.Checked = false;
+                    rdbMontoIndemnizacion.Checked = true;
+                }
             }
 
             // Método de Pago, Pago de Comisión a Agente y Garantía de Pago
@@ -327,13 +338,110 @@ namespace CoaseguroWinForms
             if (radio.Checked) {
                 model.PagoSiniestro = PagoSiniestro.Participacion;
                 model.PorcentajePagoSiniestro = model.MontoSiniestro = null;
-                txtPorcentajeSiniestro.Clear();
-                txtPorcentajeSiniestro.Enabled = false;
-                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
+                model.FormaIndemnizacion = null;
+
+                rdbPorcentajeIndemnizacion.Enabled = false;
+                rdbMontoIndemnizacion.Enabled = false;
+                txtMontoIndemnizacion.Clear();
+                txtMontoIndemnizacion.Enabled = false;
+                lblPorcentajeIndemnizacion.Text = $"{model.Moneda.Simbolo} 0.00";
+                lblMontoIndemnizacion.Text = $"0.00 %";
             } else {
                 model.PagoSiniestro = PagoSiniestro.CienPorCiento;
                 model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
-                txtPorcentajeSiniestro.Enabled = true;
+                model.FormaIndemnizacion = rdbPorcentajeIndemnizacion.Checked
+                    ? IndemnizacionSiniestro.Porcentaje
+                    : IndemnizacionSiniestro.Monto;
+
+                rdbPorcentajeIndemnizacion.Enabled = true;
+                rdbMontoIndemnizacion.Enabled = true;
+                txtMontoIndemnizacion.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Cambia la forma de calcular las cantidades de indemnización del siniestro.
+        /// </summary>
+        /// <param name="sender">El RadioButton que originó el evento.</param>
+        /// <param name="e">No se utiliza.</param>
+        private void rdbPorcentajeIndemnizacion_CheckedChanged(object sender, EventArgs e)
+        {
+            model.FormaIndemnizacion = rdbPorcentajeIndemnizacion.Checked
+                    ? IndemnizacionSiniestro.Porcentaje
+                    : IndemnizacionSiniestro.Monto;
+
+            txtMontoIndemnizacion_KeyUp(txtMontoIndemnizacion, null);
+        }
+
+
+        /// <summary>
+        /// Se dispara este evento cuando se empieza a escribir el porcentaje del límite
+        /// máximo de indemnización. Solamente deja entrar números
+        /// decimales en la caja de texto, y al mismo tiempo calcula el monto/porcentaje
+        /// de acuerdo a los RadioButton correspondientes.
+        /// </summary>
+        /// <param name="sender">La caja de texto donde se escribe el límite máximo.</param>
+        /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
+        private void txtMontoIndemnizacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
+                e.Handled = true;
+            }
+        }
+
+        private void txtMontoIndemnizacion_KeyUp(object sender, KeyEventArgs e)
+        {
+            decimal monto;
+            var textBox = sender as TextBox;
+            decimal.TryParse(textBox.Text, out monto);
+
+            if (rdbPorcentajeIndemnizacion.Checked) {
+                // Se realiza el cálculo por porcentaje.
+                if (monto > 100M || monto < 0M) {
+                    MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    lblPorcentajeIndemnizacion.Text = "0.00 %";
+                    lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} 0.00";
+                    model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
+                    textBox.Clear();
+                } else {
+                    if (!textBox.Text.EndsWith(".")) {
+                        monto = decimal.Round(monto, 2);
+                        textBox.Text = (monto == 0M)
+                            ? string.Empty
+                            : monto.ToString();
+                    }
+                    
+                    model.PorcentajePagoSiniestro = monto;
+                    model.MontoSiniestro = decimal.Round(model.LimiteMaxResponsabilidad * monto / 100M, 2);
+                    
+                    lblPorcentajeIndemnizacion.Text = $"{model.PorcentajePagoSiniestro?.ToString("N2")} %";
+                    lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} {model.MontoSiniestro?.ToString("N2")}";
+                }
+            } else {
+                // Se realiza el cálculo por monto.
+                decimal porcentaje = decimal.Round(monto * 100M / model.LimiteMaxResponsabilidad);
+
+                if (porcentaje > 100M || porcentaje < 0M) {
+                    MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
+                       MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    lblPorcentajeIndemnizacion.Text = "0.00 %";
+                    lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} 0.00";
+                    model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
+                    textBox.Clear();
+                } else {
+                    model.PorcentajePagoSiniestro = porcentaje;
+                    model.MontoSiniestro = monto;
+
+                    lblPorcentajeIndemnizacion.Text = $"{porcentaje.ToString("N2")} %";
+                    lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} {monto.ToString("N2")}";
+                }
             }
         }
 
@@ -353,26 +461,6 @@ namespace CoaseguroWinForms
 
             if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
                 e.Handled = true;
-            }
-        }
-
-        private void txtPorcentajeSiniestro_KeyUp(object sender, KeyEventArgs e)
-        {
-            decimal porcentaje;
-            var textBox = sender as TextBox;
-            decimal.TryParse(textBox.Text, out porcentaje);
-
-            if (porcentaje > 100M || porcentaje < 0M) {
-                MessageBox.Show(this, "El porcentaje debe ser mayor a 0% y menor a 100%", "Porcentaje Fuera de Límite",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} 0.00";
-                model.PorcentajePagoSiniestro = model.MontoSiniestro = 0M;
-                textBox.Clear();
-            } else {
-                model.PorcentajePagoSiniestro = porcentaje;
-                model.MontoSiniestro = decimal.Round(model.LimiteMaxResponsabilidad * porcentaje / 100M, 2);
-                lblMontoSiniestro.Text = $"{model.Moneda.Simbolo} {model.MontoSiniestro.Value.ToString("N2")}";
             }
         }
 

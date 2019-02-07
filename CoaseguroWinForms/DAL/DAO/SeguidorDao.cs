@@ -177,7 +177,7 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
                     var importeCambio = model.Moneda.ImporteCambio;
                     var coaseguroPrincipal = new CoaseguroPrincipal {
                         id_pv = idPv,
-                        cod_tipo_mov = (decimal)TipoMovimiento.Lider,
+                        cod_tipo_mov = (decimal)TipoMovimiento.Seguidor,
                         cod_moneda = model.Moneda.Id,
                         LimiteMaximoResponsabilidad = model.LimiteMaxResponsabilidad,
                         LimiteMaximoResponsabilidadEquivalente = decimal.Round(model.LimiteMaxResponsabilidad * importeCambio, 2),

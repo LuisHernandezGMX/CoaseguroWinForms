@@ -54,6 +54,8 @@ namespace CoaseguroWinForms.DAL.Entities
 
         public decimal? MontoSiniestro { get; set; }
 
+        public int? FormaIndemnizacion { get; set; }
+
         public decimal? MontoSiniestroEquivalente { get; set; }
 
         public int IdGarantiaPago { get; set; }

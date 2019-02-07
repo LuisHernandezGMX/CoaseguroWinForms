@@ -1,13 +1,13 @@
 ﻿-- Único parámetro
-Declare @IdPv As Int = 520179;
+Declare @IdPv As Int = 453292;
 --Declare @IdPv As Int = 716598;
 
 -- ***** sp_CedulaParticipacionCoaseguro(Int @IdPv) *****
 -- Procedimiento que extrae la información para la carátula 'Cédula de Participación en Coaseguro'
 
--- Datos Generales y Participación GMX
 Select '***** sp_CedulaParticipacionCoaseguro(Int @IdPv) *****';
 
+-- Datos Generales y Participación GMX
 Select
     Cast(header.cod_suc As Varchar(15)) + '-'
         + Cast(header.cod_ramo As Varchar(15)) + '-'
@@ -66,7 +66,7 @@ From [pv_header] As header
 Where header.id_pv = @IdPv;
 
 -- Ramo GMX
-Select
+Select Distinct
     ramo.txt_desc As [Ramo],   
     coaseguro.PorcentajeGMX
 From [CoaseguroPrincipal] As coaseguro
@@ -78,36 +78,13 @@ From [CoaseguroPrincipal] As coaseguro
     Inner Join [tramo] As ramo On cober.cod_ramo = ramo.cod_ramo
 Where coaseguro.id_pv = @IdPv;
 
---Select
---    ramo.txt_desc As [Ramo],   
---    coaseguro.PorcentajeGMX
---From [CoaseguroPrincipal] As coaseguro
---    Inner Join [pv_header] As header On coaseguro.id_pv = header.id_pv
---    Inner Join [di_tarif] As tarif On header.id_pv = tarif.id_pv
---    Inner Join [di_cober] As cober
---        On tarif.cod_SIC = cober.cod_ind_cob 
---        And tarif.id_pv = cober.id_pv
---    Inner Join [tramo] As ramo On cober.cod_ramo = ramo.cod_ramo
---Where coaseguro.id_pv = 716598;
-
---Select *
---From [pv_header] As header
---    Inner Join [di_tarif] As tarif On header.id_pv = tarif.id_pv
---    Inner Join [di_cober] As cober
---        On tarif.cod_SIC = cober.cod_ind_cob 
---        And tarif.id_pv = cober.id_pv
---    Inner Join [tramo] As ramo On cober.cod_ramo = ramo.cod_ramo
---Where header.id_pv = 716598;
-
---Select * From [di_tarif] where id_pv = 716598
---Select * from [di_cober_tarif] Where id_pv = 716598
-
-
--- Ramos Coaseguradoras Seguidoras
-Select
+-- Ramos, Porcentajes y Fees Coaseguradoras Seguidoras
+Select Distinct
     ramo.txt_desc As [Ramo],
     mcia.txt_nom_cia As [Coaseguradora],
-    participantes.PorcentajeParticipacion
+    participantes.PorcentajeParticipacion,
+    fee.PorcentajeFee,
+    fee.MontoFee
 From [CoaseguroPrincipal] As coaseguro
     Inner Join [pv_header] As header On coaseguro.id_pv = header.id_pv
     Inner Join [di_tarif] As tarif On header.id_pv = tarif.id_pv
@@ -116,21 +93,12 @@ From [CoaseguroPrincipal] As coaseguro
         And tarif.id_pv = cober.id_pv
     Inner Join [tramo] As ramo On cober.cod_ramo = ramo.cod_ramo
     Inner Join [CoaseguradorasParticipantes] As participantes On coaseguro.Id = participantes.IdCoaseguro
+    Inner Join [CoaseguradorasFee] As fee On coaseguro.Id = fee.IdCoaseguro
     Inner Join [mcia] As mcia On participantes.cod_cia = mcia.cod_cia
 Where coaseguro.id_pv = @IdPv;
 
--- Fees
-Select
-    mcia.txt_nom_cia As [Coaseguradora],
-    fee.PorcentajeFee,
-    fee.MontoFee
-From [CoaseguroPrincipal] As coaseguro
-    Inner Join [CoaseguradorasFee] As fee On coaseguro.Id = fee.IdCoaseguro
-    Inner Join [mcia] As mcia On fee.cod_cia = mcia.cod_cia
-Where coaseguro.id_pv = @IdPv;
-
 -- Info Adicional
-Select
+Select Distinct
     moneda.txt_desc As [Moneda],
     formaPago.txt_desc As [FormaPago],
     metodoPago.Descripcion As [MetodoPago],
