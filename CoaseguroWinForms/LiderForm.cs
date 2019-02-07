@@ -82,7 +82,9 @@ namespace CoaseguroWinForms
                     ActualizarFormulario();
                 }
             } catch (Exception ex) {
-                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                var mensaje = ex.InnerException?.InnerException?.Message
+                    ?? ex.InnerException?.Message
+                    ?? ex.Message;
 
                 MessageBox.Show(this,
                     $"Ocurrió un error al leer la póliza de la base de datos.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
@@ -489,7 +491,9 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Siguiente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             } catch (Exception ex) {
-                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                var mensaje = ex.InnerException?.InnerException?.Message
+                    ?? ex.InnerException?.Message
+                    ?? ex.Message;
 
                 MessageBox.Show(this,
                     $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
@@ -529,7 +533,10 @@ namespace CoaseguroWinForms
                 MessageBox.Show(this, "Se ha guardado la información del coaseguro con éxito.", "Suspender", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             } catch (Exception ex) {
-                var mensaje = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                var mensaje = ex.InnerException?.InnerException?.Message
+                    ?? ex.InnerException?.Message
+                    ?? ex.Message;
+
                 MessageBox.Show(this,
                     $"Ocurrió un error al guardar el coaseguro.\n\n\nERROR: {mensaje}\n\nUBICACIÓN: {ex.TargetSite}",
                     "Error al Guardar Coaseguro",
