@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
+
 using CoaseguroWinForms.DAL.Entities;
 using CoaseguroWinForms.DAL.ViewModels;
 using CoaseguroWinForms.DAL.ViewModels.Lider;
@@ -235,8 +236,8 @@ namespace CoaseguroWinForms.DAL.DAO.Lider
                             ? null
                             : decimal.Round(model.MontoSiniestro.Value * importeCambio, 2) as decimal?,
                         FormaIndemnizacion = (model.PagoSiniestro == PagoSiniestro.Participacion)
-                        ? null
-                        : (int?)model.FormaIndemnizacion.Value
+                            ? null
+                            : (int?)model.FormaIndemnizacion.Value
                     };
                     
                     db.CoaseguroPrincipal.Add(coaseguroPrincipal);

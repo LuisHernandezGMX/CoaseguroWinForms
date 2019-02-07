@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
+
 using CoaseguroWinForms.DAL.Entities;
 using CoaseguroWinForms.DAL.ViewModels;
 using CoaseguroWinForms.DAL.ViewModels.Seguidor;
@@ -34,6 +35,7 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
                 PagoSiniestro = PagoSiniestro.Participacion,
                 PorcentajePagoSiniestro = null,
                 MontoSiniestro = null,
+                FormaIndemnizacion = null,
                 GarantiaPago = DiasGarantiaPago.TreintaDias
             };
 
@@ -144,6 +146,7 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
                         model.PagoSiniestro = (PagoSiniestro)coaseguroPrincipal.IdPagoSiniestro;
                         model.PorcentajePagoSiniestro = coaseguroPrincipal.PorcentajeSiniestro;
                         model.MontoSiniestro = coaseguroPrincipal.MontoSiniestro;
+                        model.FormaIndemnizacion = (IndemnizacionSiniestro?)coaseguroPrincipal.FormaIndemnizacion;
                         model.GarantiaPago = (DiasGarantiaPago)coaseguroPrincipal.IdGarantiaPago;
 
                         model.PorcentajeTotalParticipacion = lider.PorcentajeParticipacion + model.GMX.Porcentaje;
@@ -196,7 +199,10 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
                         MontoSiniestro = model.MontoSiniestro,
                         MontoSiniestroEquivalente = (model.PagoSiniestro == PagoSiniestro.Participacion)
                             ? null
-                            : decimal.Round(model.MontoSiniestro.Value * importeCambio, 2) as decimal?
+                            : decimal.Round(model.MontoSiniestro.Value * importeCambio, 2) as decimal?,
+                        FormaIndemnizacion = (model.PagoSiniestro == PagoSiniestro.Participacion)
+                            ? null
+                            : (int?)model.FormaIndemnizacion.Value
                     };
 
                     db.CoaseguroPrincipal.Add(coaseguroPrincipal);
@@ -271,6 +277,9 @@ namespace CoaseguroWinForms.DAL.DAO.Seguidor
                     coaseguroPrincipal.MontoSiniestroEquivalente = (model.PagoSiniestro == PagoSiniestro.Participacion)
                         ? null
                         : decimal.Round(model.MontoSiniestro.Value * model.Moneda.ImporteCambio, 2) as decimal?;
+                    coaseguroPrincipal.FormaIndemnizacion = (model.PagoSiniestro == PagoSiniestro.Participacion)
+                        ? null
+                        : (int?)model.FormaIndemnizacion;
 
                     db.Entry(coaseguroPrincipal).State = EntityState.Modified;
                     db.SaveChanges();

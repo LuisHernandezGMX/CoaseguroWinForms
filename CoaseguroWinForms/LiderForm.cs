@@ -373,7 +373,6 @@ namespace CoaseguroWinForms
             txtMontoIndemnizacion_KeyUp(txtMontoIndemnizacion, null);
         }
 
-
         /// <summary>
         /// Se dispara este evento cuando se empieza a escribir el porcentaje del límite
         /// máximo de indemnización. Solamente deja entrar números
@@ -442,25 +441,6 @@ namespace CoaseguroWinForms
                     lblPorcentajeIndemnizacion.Text = $"{porcentaje.ToString("N2")} %";
                     lblMontoIndemnizacion.Text = $"{model.Moneda.Simbolo} {monto.ToString("N2")}";
                 }
-            }
-        }
-
-        /// <summary>
-        /// Se dispara este evento cuando se empieza a escribir el porcentaje del monto
-        /// máximo para pago automático de siniestro. Solamente deja entrar números
-        /// decimales en la caja de texto, y al mismo tiempo calcula el monto
-        /// de siniestro correspondiente.
-        /// </summary>
-        /// <param name="sender">La caja de texto donde se escribe el porcentaje.</param>
-        /// <param name="e">Contiene el valor de la tecla que fue presionada.</param>
-        private void txtPorcentajeSiniestro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
-                e.Handled = true;
-            }
-
-            if ((e.KeyChar == '.') && (sender as TextBox).Text.Contains(".")) {
-                e.Handled = true;
             }
         }
 
