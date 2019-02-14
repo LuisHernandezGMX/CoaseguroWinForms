@@ -27,13 +27,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblPrimaNeta = new System.Windows.Forms.Label();
@@ -135,7 +135,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.35802F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.64198F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
             this.tableLayoutPanel3.Controls.Add(this.lblPrimaNeta, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblLimiteMaximoResponsabilidad, 1, 1);
@@ -155,9 +155,9 @@
             this.lblPrimaNeta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPrimaNeta.AutoSize = true;
             this.lblPrimaNeta.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrimaNeta.Location = new System.Drawing.Point(504, 22);
+            this.lblPrimaNeta.Location = new System.Drawing.Point(503, 22);
             this.lblPrimaNeta.Name = "lblPrimaNeta";
-            this.lblPrimaNeta.Size = new System.Drawing.Size(132, 13);
+            this.lblPrimaNeta.Size = new System.Drawing.Size(133, 13);
             this.lblPrimaNeta.TabIndex = 5;
             this.lblPrimaNeta.Text = "$ 0.00";
             this.lblPrimaNeta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,7 +181,7 @@
             this.lblLimiteMaximoResponsabilidad.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLimiteMaximoResponsabilidad.Location = new System.Drawing.Point(160, 22);
             this.lblLimiteMaximoResponsabilidad.Name = "lblLimiteMaximoResponsabilidad";
-            this.lblLimiteMaximoResponsabilidad.Size = new System.Drawing.Size(338, 13);
+            this.lblLimiteMaximoResponsabilidad.Size = new System.Drawing.Size(337, 13);
             this.lblLimiteMaximoResponsabilidad.TabIndex = 3;
             this.lblLimiteMaximoResponsabilidad.Text = "$ 0.00";
             this.lblLimiteMaximoResponsabilidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -193,7 +193,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(160, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(338, 13);
+            this.label2.Size = new System.Drawing.Size(337, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Límite Máximo de Responsabilidad al 100%";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,9 +215,9 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(504, 2);
+            this.label9.Location = new System.Drawing.Point(503, 2);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 13);
+            this.label9.Size = new System.Drawing.Size(133, 13);
             this.label9.TabIndex = 4;
             this.label9.Text = "Prima Neta";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -241,7 +241,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.17647F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.82353F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblMontoCoaseguradoras, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblPorcentajeCoaseguradoras, 1, 0);
@@ -269,7 +269,7 @@
             this.lblMontoCoaseguradoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoCoaseguradoras.AutoSize = true;
             this.lblMontoCoaseguradoras.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(368, 5);
+            this.lblMontoCoaseguradoras.Location = new System.Drawing.Point(367, 5);
             this.lblMontoCoaseguradoras.Name = "lblMontoCoaseguradoras";
             this.lblMontoCoaseguradoras.Size = new System.Drawing.Size(119, 13);
             this.lblMontoCoaseguradoras.TabIndex = 2;
@@ -283,7 +283,7 @@
             this.lblPorcentajeCoaseguradoras.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPorcentajeCoaseguradoras.Location = new System.Drawing.Point(281, 5);
             this.lblPorcentajeCoaseguradoras.Name = "lblPorcentajeCoaseguradoras";
-            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(81, 13);
+            this.lblPorcentajeCoaseguradoras.Size = new System.Drawing.Size(80, 13);
             this.lblPorcentajeCoaseguradoras.TabIndex = 1;
             this.lblPorcentajeCoaseguradoras.Text = "0%";
             this.lblPorcentajeCoaseguradoras.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -293,9 +293,9 @@
             this.lblPrimaNetaTotalParticipacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPrimaNetaTotalParticipacion.AutoSize = true;
             this.lblPrimaNetaTotalParticipacion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrimaNetaTotalParticipacion.Location = new System.Drawing.Point(493, 5);
+            this.lblPrimaNetaTotalParticipacion.Location = new System.Drawing.Point(492, 5);
             this.lblPrimaNetaTotalParticipacion.Name = "lblPrimaNetaTotalParticipacion";
-            this.lblPrimaNetaTotalParticipacion.Size = new System.Drawing.Size(121, 13);
+            this.lblPrimaNetaTotalParticipacion.Size = new System.Drawing.Size(122, 13);
             this.lblPrimaNetaTotalParticipacion.TabIndex = 3;
             this.lblPrimaNetaTotalParticipacion.Text = "$ 0.00";
             this.lblPrimaNetaTotalParticipacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -318,9 +318,9 @@
             // 
             // CompaniaCoaseguradoras
             // 
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Navy;
-            this.CompaniaCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Navy;
+            this.CompaniaCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle1;
             this.CompaniaCoaseguradoras.HeaderText = "Compañías Participantes";
             this.CompaniaCoaseguradoras.Name = "CompaniaCoaseguradoras";
             this.CompaniaCoaseguradoras.ReadOnly = true;
@@ -328,10 +328,10 @@
             // 
             // PorcentajeCoaseguradoras
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Navy;
-            this.PorcentajeCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Navy;
+            this.PorcentajeCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle2;
             this.PorcentajeCoaseguradoras.HeaderText = "% Participación";
             this.PorcentajeCoaseguradoras.Name = "PorcentajeCoaseguradoras";
             this.PorcentajeCoaseguradoras.ReadOnly = true;
@@ -339,10 +339,10 @@
             // 
             // MontoCoaseguradoras
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Navy;
-            this.MontoCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Navy;
+            this.MontoCoaseguradoras.DefaultCellStyle = dataGridViewCellStyle3;
             this.MontoCoaseguradoras.HeaderText = "Monto de Participación";
             this.MontoCoaseguradoras.Name = "MontoCoaseguradoras";
             this.MontoCoaseguradoras.ReadOnly = true;
@@ -351,10 +351,10 @@
             // PrimaNeta
             // 
             this.PrimaNeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Navy;
-            this.PrimaNeta.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Navy;
+            this.PrimaNeta.DefaultCellStyle = dataGridViewCellStyle4;
             this.PrimaNeta.HeaderText = "Monto Prima Neta";
             this.PrimaNeta.Name = "PrimaNeta";
             this.PrimaNeta.ReadOnly = true;
@@ -373,10 +373,10 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.03226F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.55624F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.2454F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.21774F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 2, 0);
@@ -407,9 +407,9 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 0);
+            this.label6.Location = new System.Drawing.Point(267, 4);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 21);
+            this.label6.Size = new System.Drawing.Size(87, 13);
             this.label6.TabIndex = 1;
             this.label6.Text = "% Participación";
             // 
@@ -417,9 +417,9 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(360, 0);
+            this.label7.Location = new System.Drawing.Point(368, 4);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 21);
+            this.label7.Size = new System.Drawing.Size(129, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "Monto de Participación";
             // 
@@ -428,9 +428,9 @@
             this.lblPorcentajeGMX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPorcentajeGMX.AutoSize = true;
             this.lblPorcentajeGMX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentajeGMX.Location = new System.Drawing.Point(268, 25);
+            this.lblPorcentajeGMX.Location = new System.Drawing.Point(267, 25);
             this.lblPorcentajeGMX.Name = "lblPorcentajeGMX";
-            this.lblPorcentajeGMX.Size = new System.Drawing.Size(86, 13);
+            this.lblPorcentajeGMX.Size = new System.Drawing.Size(95, 13);
             this.lblPorcentajeGMX.TabIndex = 3;
             this.lblPorcentajeGMX.Text = "0.00 %";
             this.lblPorcentajeGMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -440,9 +440,9 @@
             this.lblMontoGMX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoGMX.AutoSize = true;
             this.lblMontoGMX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoGMX.Location = new System.Drawing.Point(360, 25);
+            this.lblMontoGMX.Location = new System.Drawing.Point(368, 25);
             this.lblMontoGMX.Name = "lblMontoGMX";
-            this.lblMontoGMX.Size = new System.Drawing.Size(127, 13);
+            this.lblMontoGMX.Size = new System.Drawing.Size(130, 13);
             this.lblMontoGMX.TabIndex = 4;
             this.lblMontoGMX.Text = "$ 0.00";
             this.lblMontoGMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -451,9 +451,9 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(493, 4);
+            this.label12.Location = new System.Drawing.Point(504, 4);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(130, 13);
+            this.label12.Size = new System.Drawing.Size(119, 13);
             this.label12.TabIndex = 5;
             this.label12.Text = "Monto Prima Neta";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -463,9 +463,9 @@
             this.lblMontoPrimaNetaGMX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoPrimaNetaGMX.AutoSize = true;
             this.lblMontoPrimaNetaGMX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoPrimaNetaGMX.Location = new System.Drawing.Point(493, 25);
+            this.lblMontoPrimaNetaGMX.Location = new System.Drawing.Point(504, 25);
             this.lblMontoPrimaNetaGMX.Name = "lblMontoPrimaNetaGMX";
-            this.lblMontoPrimaNetaGMX.Size = new System.Drawing.Size(130, 13);
+            this.lblMontoPrimaNetaGMX.Size = new System.Drawing.Size(119, 13);
             this.lblMontoPrimaNetaGMX.TabIndex = 6;
             this.lblMontoPrimaNetaGMX.Text = "$ 0.00";
             this.lblMontoPrimaNetaGMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -500,9 +500,9 @@
             // 
             // CompaniasFee
             // 
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Navy;
-            this.CompaniasFee.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Navy;
+            this.CompaniasFee.DefaultCellStyle = dataGridViewCellStyle5;
             this.CompaniasFee.HeaderText = "Compañías Participantes";
             this.CompaniasFee.Name = "CompaniasFee";
             this.CompaniasFee.ReadOnly = true;
@@ -510,10 +510,10 @@
             // 
             // PorcentajeFee
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            this.PorcentajeFee.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.PorcentajeFee.DefaultCellStyle = dataGridViewCellStyle6;
             this.PorcentajeFee.HeaderText = "% Participación";
             this.PorcentajeFee.Name = "PorcentajeFee";
             this.PorcentajeFee.Width = 103;
@@ -521,10 +521,10 @@
             // MontoFee
             // 
             this.MontoFee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Navy;
-            this.MontoFee.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Navy;
+            this.MontoFee.DefaultCellStyle = dataGridViewCellStyle7;
             this.MontoFee.HeaderText = "Monto total a comisión de cobro";
             this.MontoFee.Name = "MontoFee";
             this.MontoFee.ReadOnly = true;
@@ -789,7 +789,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.64706F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.35294F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
             this.tableLayoutPanel4.Controls.Add(this.label13, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.lblPorcentajeIndemnizacion, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.lblMontoIndemnizacion, 2, 0);
@@ -807,7 +807,7 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(3, 5);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 39);
+            this.label13.Size = new System.Drawing.Size(131, 39);
             this.label13.TabIndex = 0;
             this.label13.Text = "Límite de indemnización sin autorización previa de los Coaseguradores";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -817,9 +817,9 @@
             this.lblPorcentajeIndemnizacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPorcentajeIndemnizacion.AutoSize = true;
             this.lblPorcentajeIndemnizacion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentajeIndemnizacion.Location = new System.Drawing.Point(141, 18);
+            this.lblPorcentajeIndemnizacion.Location = new System.Drawing.Point(140, 18);
             this.lblPorcentajeIndemnizacion.Name = "lblPorcentajeIndemnizacion";
-            this.lblPorcentajeIndemnizacion.Size = new System.Drawing.Size(60, 13);
+            this.lblPorcentajeIndemnizacion.Size = new System.Drawing.Size(59, 13);
             this.lblPorcentajeIndemnizacion.TabIndex = 1;
             this.lblPorcentajeIndemnizacion.Text = "0.00%";
             this.lblPorcentajeIndemnizacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -829,9 +829,9 @@
             this.lblMontoIndemnizacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMontoIndemnizacion.AutoSize = true;
             this.lblMontoIndemnizacion.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoIndemnizacion.Location = new System.Drawing.Point(207, 18);
+            this.lblMontoIndemnizacion.Location = new System.Drawing.Point(205, 18);
             this.lblMontoIndemnizacion.Name = "lblMontoIndemnizacion";
-            this.lblMontoIndemnizacion.Size = new System.Drawing.Size(135, 13);
+            this.lblMontoIndemnizacion.Size = new System.Drawing.Size(137, 13);
             this.lblMontoIndemnizacion.TabIndex = 2;
             this.lblMontoIndemnizacion.Text = "$ 0.00";
             this.lblMontoIndemnizacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
